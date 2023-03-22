@@ -11,7 +11,7 @@ const UserChat = () => {
         </label>
         <div className="chat-wrapper">
           <div className="chat-header">
-            <h6>Let's Chat - Online</h6>
+            <h6>Questions? we are here to help</h6>
           </div>
           <div className="chat-form">
             <div className="cht-msg">
