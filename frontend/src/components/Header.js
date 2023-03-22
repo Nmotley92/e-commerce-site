@@ -17,7 +17,7 @@ const Header = () => {
                             <DropdownButton id="dropdown-basic-button" title="All">
                                 <Dropdown.Item>Electronics</Dropdown.Item>
                                 <Dropdown.Item>Books</Dropdown.Item>
-                                <Dropdown.Item>Cars</Dropdown.Item>
+                                <Dropdown.Item>Cameras</Dropdown.Item>
 
                             </DropdownButton>
                             <Form.Control type="text" placeholder="Search in shop.." />
