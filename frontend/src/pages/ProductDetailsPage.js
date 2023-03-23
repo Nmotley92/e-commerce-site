@@ -11,16 +11,52 @@ import {
 import Rating from 'react-rating';
 import AddedToCartMessageComponent from "../components/AddedToCartMessageComponent";
 
+import ImageZoom from "js-image-zoom";
+import { useEffect } from "react";
+
 const ProductDetailsPage = () => {
+    var options = {
+        // width: 400,
+        // zoomWidth: 500,
+        // fillContainer: true,
+        // zoomPosition: "bottom",
+        scale: 2,
+        offset: { vertical: 0, horizontal: 0 },
+    };
+    useEffect(() => {
+        new ImageZoom(document.getElementById("first"), options);
+        new ImageZoom(document.getElementById("second"), options);
+        new ImageZoom(document.getElementById("third"), options);
+        new ImageZoom(document.getElementById("fourth"), options);
+    });
+
+
+
     return (
         <Container>
             <AddedToCartMessageComponent />
             <Row className="mt-5">
-                <Col md={4}>
-                    <Image fluid src="/images/games-category.png" />
-                    <Image fluid src="/images/monitors-category.png" />
-                    <Image fluid src="/images/tablets-category.png" />
-                    <Image fluid src="/images/games-category.png" />
+                <Col style={{ zIndex: 1 }} md={4}>
+                    <div id="first">
+                        <Image
+                            crossOrigin="anonymous"
+                            fluid
+                            src="/images/games-category.png"
+                        />
+                    </div>
+                    <br />
+                    <div id="second">
+                        <Image fluid src="/images/monitors-category.png" />
+                    </div>
+                    <br />
+                    <div id="third">
+                        <Image fluid src="/images/tablets-category.png" />
+                    </div>
+                    <br />
+                    <div id="fourth">
+                        <Image fluid src="/images/games-category.png" />
+                    </div>
+                    <br />
                 </Col>
                 <Col md={8}>
                     <Row>
