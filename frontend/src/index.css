@@ -15,3 +15,7 @@ footer {
   height: 170px;
   
 }
+
+.custom-rating .fas {
+  color: #f5c518;
+}
