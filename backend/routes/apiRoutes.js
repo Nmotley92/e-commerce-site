@@ -4,4 +4,6 @@ const productRoutes = require('./productRoutes')
 
 app.use('/products', productRoutes)
 
+
+
 module.exports = app
