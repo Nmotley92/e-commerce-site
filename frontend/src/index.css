@@ -15,3 +15,16 @@ footer {
   height: 170px;
   
 }
+
+.category-container,
+.navbar {
+  font-family: 'Red Hat Text', sans-serif;
+  color: black;
+}
+
+#dropdown-basic-button,
+.search-btn {
+  background-color: #F8F9FA;
+  border-color: #CED4D9;
+  color: black;
+}

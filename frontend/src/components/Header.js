@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg">
             <Container>
                 <LinkContainer to="/">
                     <Navbar.Brand href="/">Shop Name</Navbar.Brand>
@@ -21,7 +21,7 @@ const Header = () => {
 
                             </DropdownButton>
                             <Form.Control type="text" placeholder="Search in shop.." />
-                            <Button variant="warning"><i className="bi bi-search text-dark"></i></Button>
+                            <Button className="search-btn"><i className="bi bi-search text-dark"></i></Button>
                         </InputGroup>
                     </Nav>
                     <Nav>

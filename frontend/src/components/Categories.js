@@ -22,7 +22,7 @@ const Categories = ({ category, idx }) => {
                     bulk of the card's content.
                 </Card.Text>
                 <LinkContainer to="/product-list">
-                    <Button variant="primary">Go to the category</Button>
+                    <Button className="btn-light border border-secondary-subtle">Go to the category</Button>
                 </LinkContainer>
             </Card.Body>
         </Card>

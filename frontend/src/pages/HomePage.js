@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <>
       <CarouselComponent />
-      <Container>
+      <Container className="category-container">
         <Row xs={1} md={2} className="g-4 mt-5">
           {categories.map((category, idx) => (
             <Categories key={idx} category={category} idx={idx} />
