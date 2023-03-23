@@ -16,9 +16,15 @@ footer {
   
 }
 
+.navbar-brand,
+.nav-link {
+  color: white;
+}
+
 .category-container,
 .navbar {
-  font-family: 'Red Hat Text', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ead7c3;
   color: black;
 }
 
@@ -27,6 +33,11 @@ footer {
   background-color: #F8F9FA;
   border-color: #CED4D9;
   color: black;
+}
+
+.carousel-caption {
+  font-family: 'Libre Caslon Text', sans-serif;
+}
 
 .custom-rating .fas {
   color: #f5c518;

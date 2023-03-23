@@ -31,6 +31,7 @@ import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
 import AdminOrderDetailsPage from "./pages/admin/AdminOrderDetailsPage";
 import AdminChatsPage from "./pages/admin/AdminChatsPage";
 import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
+import ScrollToTop from "./utils/ScrollToTop";
 
 
 
@@ -41,6 +42,7 @@ import AdminAnalyticsPage from "./pages/admin/AdminAnalyticsPage";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route element={<RoutesUserChat />} >
