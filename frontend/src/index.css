@@ -27,4 +27,7 @@ footer {
   background-color: #F8F9FA;
   border-color: #CED4D9;
   color: black;
+
+.custom-rating .fas {
+  color: #f5c518;
 }
