@@ -11,7 +11,7 @@ const CarouselComponent = () => {
         <img crossOrigin='anonymous'
           className="d-block w-100"
           style={{height: '300px', objectFit: 'cover'}}
-          src="/images/carousel-1.png"
+          src="/images/books-1.avif"
           alt="First slide"
         />
         <Carousel.Caption>
@@ -26,7 +26,7 @@ const CarouselComponent = () => {
         <img
           className="d-block w-100"
           style={{height: '300px', objectFit: 'cover'}}
-          src="/images/carousel-2.png"
+          src="/images/books-2.avif"
           alt="Second slide"
         />
 
@@ -42,7 +42,7 @@ const CarouselComponent = () => {
         <img
           className="d-block w-100"
           style={{height: '300px', objectFit: 'cover'}}
-          src="/images/carousel-3.png"
+          src="/images/books-3.avif"
           alt="Third slide"
         />
 
