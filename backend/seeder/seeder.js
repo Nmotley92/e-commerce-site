@@ -4,10 +4,13 @@ connectDB()
 const categoryData = require("./categories")
 const productData = require("./products")
 const reviewData = require("./reviews")
+const userData = require("./users")
 
 const Category = require("../models/CategoryModel")
 const Product = require("../models/ProductModel")
 const Review = require("../models/ReviewModel")
+const reviews = require("./reviews")
+const User = require("../models/UserModel")
 
 const importData = async () => {
     try {
@@ -17,11 +20,19 @@ const importData = async () => {
         await Category.collection.deleteMany({})
         await Product.collection.deleteMany({})
         await Review.collection.deleteMany({})
+        await User.collection.deleteMany({})
 
         await Category.insertMany(categoryData)
-        await Product.insertMany(productData)
-        await Review.insertMany(reviewData)
-
+        const reviews = await Review.insertMany(reviewData)
+        const sampleProducts = productData.map((product) => {
+            reviews.map((review) => {
+                product.reviews.push(review._id)
+            })
+            return { ...product }
+        });
+        await Product.insertMany(sampleProducts)
+        await User.insertMany(userData)
+        
         console.log("Data imported successfully")
         process.exit()
     } catch (error) {
@@ -30,4 +41,4 @@ const importData = async () => {
     }
 }
 importData()
- 
+
