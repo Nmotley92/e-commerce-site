@@ -1,5 +1,8 @@
+const Product = require('../models/productModel')
+
 const getProducts = (req, res) => {
-    res.send ('Handling Products routes')
-    }
+
+    res.send('Handling Products routes')
+}
 
 module.exports = getProducts
