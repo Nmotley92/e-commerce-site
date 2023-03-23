@@ -1,5 +1,3 @@
-const { model } = require("mongoose");
-
 const categories = [
         {
         name: "Mellicent",
@@ -57,4 +55,4 @@ const categories = [
     ];
 
 
-    model.exports = categories;
+    module.exports = categories;
