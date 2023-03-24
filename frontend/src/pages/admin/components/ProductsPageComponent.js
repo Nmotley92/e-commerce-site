@@ -3,13 +3,30 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
 import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
+import { useState, useEffect} from "react";
+
+
 const deleteHandler = () => {
     if(window.confirm("Are you sure?")) alert("Product has been removed.")
 
 }
 
 
-const ProductsPageComponent = () => {
+const ProductsPageComponent = ({fetchProducts}) => {
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const abctrl = new AbortController();
+
+        fetchProducts(abctrl).then((res) => setProducts(res)).catch((err) =>
+        console.log(
+            err.response.data.message ? err.response.data.message : err.response.data)
+        ) ;
+        return () => abctrl.abort();
+
+    }, []);
+
     return (
         <Row className="m-5">
             <Col md={2}>
@@ -35,18 +52,14 @@ const ProductsPageComponent = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {[
-                            { name: "Panasonic", price: "5250", category: "TV" },
-                            { name: "Lenova", price: "1000", category: "Laptops" },
-                            { name: "GTA 10", price: "5345", category: "Games" },
-                        ].map([item, idx] => (
+                        {products.map([item, idx] => (
                             <tr key={idx}>
                                 <td>{idx + 1}</td>
                                 <td>{item.name}</td>
                                 <td>{item.price}</td>
                                 <td>{item.category}</td>
                                 <td>
-                                    <LinkContainer to="/admin/edit-product">
+                                    <LinkContainer to={`/admin/edit-product/${item._id}`}>
                                         <Button className="btn-sm">
                                             <i className="bi bi-pencil-square"></i>
                                         </Button>
