@@ -1,5 +1,7 @@
+import ProductsPageComponent from "./components/productsPageComponent";
+
 const AdminProductsPage = () => {
-    return <p>This is the admin product page</p>;
-}
+    return <ProductsPageComponent />
+};
 
 export default AdminProductsPage;
