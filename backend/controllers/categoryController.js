@@ -29,6 +29,22 @@ const newCategory = async (req, res, next) => {
     }
 }
 
-module.exports = { getCategories, newCategory }
+const deleteCategory = async (req, res, next) => {
+    // return res.send(req.params.category)
+    try {
+        if(req.params.category !== "Choose category") {
+            const categoryExists = await Category.findOne({
+                name: decodeURIComponent(req.params.category)
+            }).orFail()
+            await categoryExists.remove()
+            res.json({categoryDeleted: true})
+        }
+    } catch (err) {
+        next(err)
+    }
+}
+
+
+module.exports = { getCategories, newCategory, deleteCategory }
 
 // module.exports = {getCategories, newCategory, deleteCategory, saveAttr}
