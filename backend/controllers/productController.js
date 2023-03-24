@@ -24,6 +24,15 @@ const getProducts = async (req, res, next) => {
         var regEx = new RegExp("^" + a)
         categoryQueryCondition = { category: regEx }
     }
+    if(req.query.category) {
+        queryCondition = true
+        let a = req.query.category.split(",").map((item) => {
+            if(item) return new RegExp("^" + item)
+        })
+        categoryQueryCondition = {
+            category: { $in: a }
+        }
+    }
 
     if (queryCondition) {
       query = {
