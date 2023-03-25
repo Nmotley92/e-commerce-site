@@ -149,32 +149,32 @@ const adminDeleteProduct = async (req, res, next) => {
   }
 };
 
-const adminCreateProduct = async(req, res, next) => {
+const adminCreateProduct = async (req, res, next) => {
   try {
-      const product = new Product()
-      const { name, description, count, price, category,attributesTable  } = req.body
-      product.name = name
-      product.description = description
-      product.count = count
-      product.price = price
-      product.category = category
-      if( attributesTable.length > 0 ) {
-          attributesTable.map((item) => {
-              product.attrs.push(item)
-          })
-      }
-      await product.save()
-
-      res.json({
-          message: "product created",
-          productId: product._id
+    const product = new Product()
+    const { name, description, count, price, category, attributesTable } = req.body
+    product.name = name
+    product.description = description
+    product.count = count
+    product.price = price
+    product.category = category
+    if (attributesTable.length > 0) {
+      attributesTable.map((item) => {
+        product.attrs.push(item)
       })
-  } catch(err) {
-      next(err)
+    }
+    await product.save()
+
+    res.json({
+      message: "product created",
+      productId: product._id
+    })
+  } catch (err) {
+    next(err)
   }
 };
 
-const adminUpdateProduct = async(req, res, next) => {
+const adminUpdateProduct = async (req, res, next) => {
   try {
     const product = await Product.findById(req.params.id).orFail()
     const { name, description, count, price, category, attributesTable } = req.body
@@ -183,10 +183,10 @@ const adminUpdateProduct = async(req, res, next) => {
     product.count = count || product.count
     product.price = price || product.price
     product.category = category || product.category
-    if( attributesTable.length > 0 ) {
+    if (attributesTable.length > 0) {
       product.attrs = []
       attributesTable.map((item) => {
-          product.attrs.push(item)
+        product.attrs.push(item)
       })
     } else {
       product.attrs = []
@@ -195,9 +195,25 @@ const adminUpdateProduct = async(req, res, next) => {
     res.json({
       message: "product updated",
     })
-  } catch(err) {
-      next(err)
+  } catch (err) {
+    next(err)
   }
 };
 
-module.exports = { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct, adminCreateProduct, adminUpdateProduct };
+const adminUpload = async (req, res, next) => {
+  try {
+    if (!req.files || !!req.files.images === false) {
+      return res.status(400).json({ message: 'No files were uploaded.' });
+    }
+    if (Array.isArray(req.files.images)) {
+      return res.status(400).json({ message: req.files.images.length + 'files uploaded successfully.' });
+    } else {
+      res.send('Your file was uploaded successfully.');
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct,
+   adminCreateProduct, adminUpdateProduct, adminUpload };
