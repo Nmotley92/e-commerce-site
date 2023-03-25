@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct, adminCreateProduct } = require('../controllers/productController')
+const { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct, adminCreateProduct, adminUpdateProduct } = require('../controllers/productController')
 
 router.get('/', getProducts)
 router.get('/category/:categoryName', getProducts)
@@ -12,6 +12,7 @@ router.get('/get-one/:id', getProductById)
 // admin routes:
 router.get('/admin', adminGetProducts)
 router.delete('/admin/:id', adminDeleteProduct)
+router.put('/admin/:id', adminUpdateProduct)
 router.post('/admin', adminCreateProduct)
 
 
