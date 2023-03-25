@@ -35,8 +35,6 @@ const getProducts = async (req, res, next) => {
     }
     let attrsQueryCondition = [];
     if (req.query.attrs) {
-      // attrs=RAM-1TB-2TB-4TB,color-blue-red
-      // [ 'RAM-1TB-4TB', 'color-blue', '' ]
       attrsQueryCondition = req.query.attrs.split(",").reduce((acc, item) => {
         if (item) {
           let a = item.split("-");
@@ -46,11 +44,9 @@ const getProducts = async (req, res, next) => {
             attrs: { $elemMatch: { key: a[0], value: { $in: values } } },
           };
           acc.push(a1);
-          // console.dir(acc, { depth: null })
           return acc;
         } else return acc;
       }, []);
-    //   console.dir(attrsQueryCondition, { depth: null });
     queryCondition = true;
     }
 
@@ -71,6 +67,7 @@ const getProducts = async (req, res, next) => {
     if(searchQuery) {
         queryCondition = true
         searchQueryCondition = { $text: { $search: searchQuery } }
+        // meta score is used for sorting by relevance
         select = {
             score: { $meta: "textScore" }
         }
@@ -89,6 +86,7 @@ const getProducts = async (req, res, next) => {
       };
     }
 
+    // count total products for pagination and returns total products with correct number of links
     const totalProducts = await Product.countDocuments(query);
     const products = await Product.find(query)
         .select(select)
@@ -105,5 +103,16 @@ const getProducts = async (req, res, next) => {
     next(error);
   }
 };
-module.exports = getProducts;
+
+const getProductById = async (req, res, next) => {
+  try {
+    const product = await Product.findById(req.params.id).populate('reviews').orFail();
+    res.json(product);
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getProducts, getProductById } ;
 
