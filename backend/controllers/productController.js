@@ -210,11 +210,26 @@ const adminUpload = async (req, res, next) => {
     if (validateResult.error) {
       return res.status(400).send(validateResult.error);
     }
+    const path = require('path');
+    const { v4: uuidv4 } = require('uuid');
+    const uploadDirectory = path.resolve(__dirname, '../../frontend', "public", 'images', 'products');
+
+    let imagesTable = [];
+
     if (Array.isArray(req.files.images)) {
-      return res.status(400).json({ message: req.files.images.length + 'files uploaded successfully.' });
+      imagesTable = req.files.images
     } else {
-      res.send('Your file was uploaded successfully.');
+      imagesTable.push(req.files.images)
     }
+  for(let image of imagesTable) {
+    var uploadPath = uploadDirectory + '/' + uuidv4() + path.extname(image.name);
+    image.mv(uploadPath, function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+    })
+  }
+  return res.send({ message: 'Images uploaded' })
   } catch (error) {
     next(error);
   }
