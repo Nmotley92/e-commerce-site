@@ -214,6 +214,8 @@ const adminUpload = async (req, res, next) => {
     const { v4: uuidv4 } = require('uuid');
     const uploadDirectory = path.resolve(__dirname, '../../frontend', "public", 'images', 'products');
 
+    let product = await Product.findById(req.query.productId).orFail()
+
     let imagesTable = [];
 
     if (Array.isArray(req.files.images)) {
@@ -222,13 +224,16 @@ const adminUpload = async (req, res, next) => {
       imagesTable.push(req.files.images)
     }
   for(let image of imagesTable) {
-    var uploadPath = uploadDirectory + '/' + uuidv4() + path.extname(image.name);
+    var fileName = uuidv4() + path.extname(image.name);
+    var uploadPath = uploadDirectory + '/' + fileName
+    product.images.push({ path: '/images/products/' + fileName})
     image.mv(uploadPath, function (err) {
       if (err) {
         return res.status(500).send(err);
       }
     })
   }
+  await product.save()
   return res.send({ message: 'Images uploaded' })
   } catch (error) {
     next(error);
