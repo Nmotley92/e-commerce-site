@@ -1,6 +1,7 @@
 const Product = require("../models/ProductModel");
 const recordsPerPage = require("../config/pagination");
 const imageValidate = require("../utils/imageValidate");
+const { decode } = require("punycode");
 
 const getProducts = async (req, res, next) => {
   try {
@@ -223,22 +224,53 @@ const adminUpload = async (req, res, next) => {
     } else {
       imagesTable.push(req.files.images)
     }
-  for(let image of imagesTable) {
-    var fileName = uuidv4() + path.extname(image.name);
-    var uploadPath = uploadDirectory + '/' + fileName
-    product.images.push({ path: '/images/products/' + fileName})
-    image.mv(uploadPath, function (err) {
-      if (err) {
-        return res.status(500).send(err);
-      }
-    })
-  }
-  await product.save()
-  return res.send({ message: 'Images uploaded' })
+    for (let image of imagesTable) {
+      var fileName = uuidv4() + path.extname(image.name);
+      var uploadPath = uploadDirectory + '/' + fileName
+      product.images.push({ path: '/images/products/' + fileName })
+      image.mv(uploadPath, function (err) {
+        if (err) {
+          return res.status(500).send(err);
+        }
+      })
+    }
+    await product.save()
+    return res.send({ message: 'Images uploaded' })
   } catch (error) {
     next(error);
   }
 };
 
-module.exports = { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct,
-   adminCreateProduct, adminUpdateProduct, adminUpload };
+const adminDeleteProductImage = async (req, res, next) => {
+  try {
+    const imagePath = decodeURIComponent(req.params.imagePath);
+    const path = require("path");
+    const finalPath = path.resolve("../frontend/public") + imagePath;
+
+    const fs = require("fs");
+    fs.unlink(finalPath, (err) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+    });
+    await Product.findOneAndUpdate(
+      { _id: req.params.productId },
+      { $pull: { images: { path: imagePath } } }
+    ).orFail();
+    return res.end();
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  getProducts,
+  getProductById,
+  getBestsellers,
+  adminGetProducts,
+  adminDeleteProduct,
+  adminCreateProduct,
+  adminUpdateProduct,
+  adminUpload,
+  adminDeleteProductImage
+};
