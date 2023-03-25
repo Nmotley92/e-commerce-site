@@ -114,5 +114,15 @@ const getProductById = async (req, res, next) => {
   }
 };
 
-module.exports = { getProducts, getProductById } ;
+const getBestsellers = async (req, res, next) => {
+  try {
+      const products = await Product.aggregate([
+          { $limit: 3 }
+      ])
+      res.json(products)
+  } catch(error) {
+      next(error)
+  }
+}
 
+module.exports = { getProducts, getProductById, getBestsellers };
