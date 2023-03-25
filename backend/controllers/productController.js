@@ -47,7 +47,7 @@ const getProducts = async (req, res, next) => {
           return acc;
         } else return acc;
       }, []);
-    queryCondition = true;
+      queryCondition = true;
     }
 
     //pagination
@@ -64,14 +64,14 @@ const getProducts = async (req, res, next) => {
     const searchQuery = req.params.searchQuery || ""
     let searchQueryCondition = {}
     let select = {}
-    if(searchQuery) {
-        queryCondition = true
-        searchQueryCondition = { $text: { $search: searchQuery } }
-        // meta score is used for sorting by relevance
-        select = {
-            score: { $meta: "textScore" }
-        }
-        sort = { score: { $meta: "textScore" } }
+    if (searchQuery) {
+      queryCondition = true
+      searchQueryCondition = { $text: { $search: searchQuery } }
+      // meta score is used for sorting by relevance
+      select = {
+        score: { $meta: "textScore" }
+      }
+      sort = { score: { $meta: "textScore" } }
     }
 
     if (queryCondition) {
@@ -89,7 +89,7 @@ const getProducts = async (req, res, next) => {
     // count total products for pagination and returns total products with correct number of links
     const totalProducts = await Product.countDocuments(query);
     const products = await Product.find(query)
-        .select(select)
+      .select(select)
       .skip(recordsPerPage * (pageNum - 1))
       .sort(sort)
       .limit(recordsPerPage);
@@ -116,23 +116,23 @@ const getProductById = async (req, res, next) => {
 
 const getBestsellers = async (req, res, next) => {
   try {
-      const products = await Product.aggregate([
-        { $sort: { category: 1, sales: -1 } },
-        { $group: { _id: "$category", doc_with_max_sales: { $first: "$$ROOT" } } },
-        { $replaceWith: "$doc_with_max_sales" },
-        { $match: { sales: { $gt: 0 } } },
-        { $project: { _id: 1, name: 1, images: 1, category: 1, description: 1 } },
-        { $limit: 3 }
-      ])
-      res.json(products)
-  } catch(error) {
-      next(error)
+    const products = await Product.aggregate([
+      { $sort: { category: 1, sales: -1 } },
+      { $group: { _id: "$category", doc_with_max_sales: { $first: "$$ROOT" } } },
+      { $replaceWith: "$doc_with_max_sales" },
+      { $match: { sales: { $gt: 0 } } },
+      { $project: { _id: 1, name: 1, images: 1, category: 1, description: 1 } },
+      { $limit: 3 }
+    ])
+    res.json(products)
+  } catch (error) {
+    next(error)
   }
 }
 
 const adminGetProducts = async (req, res, next) => {
   try {
-    const products = await Product.find({}).sort({ category: 1 }).select( 'name price category');
+    const products = await Product.find({}).sort({ category: 1 }).select('name price category');
     res.json(products);
   } catch (error) {
     next(error);
@@ -141,13 +141,38 @@ const adminGetProducts = async (req, res, next) => {
 
 const adminDeleteProduct = async (req, res, next) => {
   try {
-      const product = await Product.findById(req.params.id).orFail()
-      await product.remove()
-      res.json({ message: 'Product deleted' })
+    const product = await Product.findById(req.params.id).orFail()
+    await product.remove()
+    res.json({ message: 'Product deleted' })
   } catch (error) {
     next(error);
   }
 };
 
+const adminCreateProduct = async(req, res, next) => {
+  try {
+      const product = new Product()
+      const { name, description, count, price, category,attributesTable  } = req.body
+      product.name = name
+      product.description = description
+      product.count = count
+      product.price = price
+      product.category = category
+      if( attributesTable.length > 0 ) {
+          attributesTable.map((item) => {
+              product.attrs.push(item)
+          })
+      }
+      await product.save()
 
-module.exports = { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct };
+      res.json({
+          message: "product created",
+          productId: product._id
+      })
+  } catch(err) {
+      next(err)
+  }
+}
+
+
+module.exports = { getProducts, getProductById, getBestsellers, adminGetProducts, adminDeleteProduct, adminCreateProduct };
