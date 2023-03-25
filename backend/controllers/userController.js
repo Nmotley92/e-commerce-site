@@ -8,3 +8,8 @@ const deleteUser = async (req, res, next) => {
         next(err);
     }
     }
+const getUsers = (req, res) => {
+    res.send('Handling Users routes')
+}
+
+module.exports = getUsers

@@ -5,27 +5,33 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
 import { useState, useEffect} from "react";
 
+const ProductsPageComponent = ({fetchProducts, deleteProduct}) => {
+    
+    const [products, setProducts] = useState([]);
+    const [productDeleted, setProductDeleted] = useState(false);
 
-const deleteHandler = () => {
-    if(window.confirm("Are you sure?")) alert("Product has been removed.")
+const deleteHandler = async (productId) => {
+    if(window.confirm("Are you sure?")) {
+    const data = await deleteProduct(productId)
 
+    if(data.message === "product removed"){
+        setProductDeleted(!productDeleted);
+    }
 }
 
-
-const ProductsPageComponent = ({fetchProducts}) => {
-
-    const [products, setProducts] = useState([]);
+};
 
     useEffect(() => {
         const abctrl = new AbortController();
 
         fetchProducts(abctrl).then((res) => setProducts(res)).catch((err) =>
-        console.log(
-            err.response.data.message ? err.response.data.message : err.response.data)
-        ) ;
+        setProducts([
+           {name: err.response.data.message ? err.response.data.message : err.response.data}
+        ]) 
+        );
         return () => abctrl.abort();
 
-    }, []);
+    }, [productDeleted]);
 
     return (
         <Row className="m-5">
@@ -65,7 +71,7 @@ const ProductsPageComponent = ({fetchProducts}) => {
                                         </Button>
                                         </LinkContainer>
                                         {"/"}
-                                        <Button variant="danger" className="btn-sm" onClick={deleteHandler}>
+                                        <Button variant="danger" className="btn-sm" onClick={() => deleteHandler(item._id)}>
                                             <i className="bi bi-x-circle"></i>
                                         </Button>
                                 </td>

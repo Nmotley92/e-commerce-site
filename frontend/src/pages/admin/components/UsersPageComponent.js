@@ -14,7 +14,7 @@ const UsersPageComponent = ({fetchUsers, deleteUser}) => {
         if(window.confirm("Are you sure?")) {
            const data = await deleteUser(userId);
            if(data === 'user removed') {
-            setUserDeleted(!userDeleted)
+            setUserDeleted(!userDeleted);
            }
         }
         
@@ -74,12 +74,12 @@ useEffect(() => {
                             
                             )
                               )}
-                        
+                            
                     </tbody>
                             
                 </Table>
             </Col>
         </Row>
-                      
 
+    
 export default UsersPageComponent;

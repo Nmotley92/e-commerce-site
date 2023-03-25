@@ -1,5 +1,15 @@
-const AdminOrdersPage = () => {
-    return <p>This is the admin orders page</p>;
+import OrdersPageComponent from "./components/OrdersPageComponent";
+
+import axios from "axios";
+
+const getOrders = async() => {
+  const {data} = await axios.get("/api/order/admin");
+  return data 
 }
 
+const AdminOrdersPage = () => {
+  return <OrdersPageComponent getOrders={getOrders}/>
+};
+
 export default AdminOrdersPage;
+

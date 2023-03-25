@@ -16,10 +16,8 @@ const CarouselComponent = () => {
         />
         <Carousel.Caption>
           <LinkContainer style={cursorP} to="/product-details">
-            <h3>Best seller in Laptops category</h3>
+            <h3 className="carousel-caption">A better way to discover books and support authors</h3>
           </LinkContainer>
-          
-          <p>Dell Inspiron 15</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -32,10 +30,8 @@ const CarouselComponent = () => {
 
         <Carousel.Caption>
         <LinkContainer style={cursorP} to="/product-details">
-            <h3>Best seller in Books Category</h3>
+            <h3 className="carousel-caption">Expand your knowledge by reading books</h3>
           </LinkContainer>
-          
-          <p>Description of top selling book</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -48,12 +44,8 @@ const CarouselComponent = () => {
 
         <Carousel.Caption>
         <LinkContainer style={cursorP} to="/product-details">
-            <h3>Best seller in Cameras category</h3>
+            <h3 className="carousel-caption">Find your next book</h3>
           </LinkContainer>
-          
-          <p>
-            Best selling cmaera description.
-          </p>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
