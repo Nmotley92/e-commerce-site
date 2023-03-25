@@ -1,5 +1,6 @@
 const Product = require("../models/ProductModel");
 const recordsPerPage = require("../config/pagination");
+const imageValidate = require("../utils/imageValidate");
 
 const getProducts = async (req, res, next) => {
   try {
@@ -204,6 +205,10 @@ const adminUpload = async (req, res, next) => {
   try {
     if (!req.files || !!req.files.images === false) {
       return res.status(400).json({ message: 'No files were uploaded.' });
+    }
+    const validateResult = imageValidate(req.files.images);
+    if (validateResult.error) {
+      return res.status(400).send(validateResult.error);
     }
     if (Array.isArray(req.files.images)) {
       return res.status(400).json({ message: req.files.images.length + 'files uploaded successfully.' });
