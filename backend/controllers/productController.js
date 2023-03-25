@@ -130,4 +130,14 @@ const getBestsellers = async (req, res, next) => {
   }
 }
 
-module.exports = { getProducts, getProductById, getBestsellers };
+const adminGetProducts = async (req, res, next) => {
+  try {
+    const products = await Product.find({}).sort({ category: 1 }).select( 'name price category');
+    res.json(products);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+module.exports = { getProducts, getProductById, getBestsellers, adminGetProducts };
