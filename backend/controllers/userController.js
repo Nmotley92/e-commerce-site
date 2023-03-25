@@ -1,5 +1,5 @@
 const User = require('../models/userModel')
-const { hashPassword } = require('../utils/hashPassword')
+const { hashPassword, comparePasswords } = require('../utils/hashPassword')
 const generateAuthToken = require('../utils/generateAuthToken')
 
 const getUsers = async (req, res, next) => {
@@ -51,4 +51,53 @@ const registerUser = async (req, res, next) => {
     }
 };
 
-module.exports = { getUsers, registerUser }
+const loginUser = async (req, res, next) => {
+    try {
+        const { email, password, doNotLogout } = req.body
+        if (!email || !password) {
+            return res.status(400).send('Please fill all fields')
+        }
+
+        const user = await User.findOne({ email }).orFail();
+        if (user && comparePasswords(password, user.password)) {
+            let cookieParams = {
+                httpOnly: true,
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'strict'
+            };
+
+            if (doNotLogout) {
+                cookieParams = { ...cookieParams, maxAge: 1000 * 60 * 60 * 24 * 7 };
+            }
+
+            return res.cookie(
+                'access_token',
+                generateAuthToken(
+                    user._id,
+                    user.name,
+                    user.lastName,
+                    user.email,
+                    user.isAdmin,
+                ),
+                cookieParams
+            )
+                .json({
+                    success: "User logged in",
+                    userLoggedIn: {
+                        _id: user._id,
+                        name: user.name,
+                        lastName: user.lastName,
+                        email: user.email,
+                        isAdmin: user.isAdmin,
+                        doNotLogout
+                    }
+                });
+        } else {
+            return res.status(401).send('Invalid login credentials')
+        }
+    } catch (err) {
+        next(err)
+    }
+};
+
+module.exports = { getUsers, registerUser, loginUser }
