@@ -5,7 +5,9 @@ const port = 3000
 const apiRoutes = require('./routes/apiRoutes')
 
 app.use(express.json())
+app.use(cookieParser())
 app.use(fileUpload())
+
 
 app.get('/', async (req, res, next) => {
   res.json({ message: "API is working" })
