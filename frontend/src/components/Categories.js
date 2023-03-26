@@ -3,18 +3,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 const Categories = ({ category, idx }) => {
     const images = [
-        "/images/tablets-category.png",
-        "/images/monitors-category.png",
-        "/images/games-category.png",
-        "/images/tablets-category.png",
-        "/images/tablets-category.png",
-        "/images/tablets-category.png",
-        "/images/tablets-category.png",
-        "/images/tablets-category.png",
+        "/images/romance-books.webp",
+        "/images/fantasy-books.webp",
+        "/images/horror-books.webp",
+        "/images/ya-books.webp",
     ];
     return (
-        <Card>
-            <Card.Img crossOrigin='anonymous' variant="top" src={images[idx]} />
+        <Card className='card-container'>
+            <Card.Img className="card-img" crossOrigin='anonymous' variant="top" src={images[idx]} />
             <Card.Body>
                 <Card.Title>{category}</Card.Title>
                 <Card.Text>

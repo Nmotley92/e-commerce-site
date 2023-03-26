@@ -13,26 +13,64 @@ footer {
   bottom: 0;
   width: 100%;
   height: 170px;
-  
+  background-color: black;
+  color: white;
+}
+
+#root {
+  background-color: black;
 }
 
 .navbar-brand,
-.nav-link {
+.card-title {
   color: white;
+  font-weight: 600;
+}
+
+.nav-link,
+.navbar-brand:hover,
+.navbar-brand:active,
+.nav-link:active {
+  color: white;
+}
+
+.nav-link:hover {
+  color: gray;
 }
 
 .category-container,
 .navbar {
   font-family: 'Montserrat', sans-serif;
-  background-color: #ead7c3;
-  color: black;
+  color: white;
+}
+
+.intro-container {
+  height: 600px;
+  margin: 100px;
+}
+
+.intro-container h1 {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+}
+
+.intro-container p {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #dropdown-basic-button,
-.search-btn {
-  background-color: #F8F9FA;
-  border-color: #CED4D9;
-  color: black;
+.search-btn,
+.card-container {
+  background-color: black;
+  border-color: transparent;
+  color: white;
+}
+
+.card-img {
+  border-radius: 10%;
 }
 
 .carousel-caption {
