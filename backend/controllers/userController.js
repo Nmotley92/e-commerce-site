@@ -1,4 +1,4 @@
-const User = require('../models/userModel')
+const User = require('../models/UserModel')
 const Review = require('../models/ReviewModel')
 const Product = require('../models/ProductModel')
 const { hashPassword, comparePasswords } = require('../utils/hashPassword')
