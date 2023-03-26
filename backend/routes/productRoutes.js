@@ -23,6 +23,7 @@ router.get('/get-one/:id', getProductById)
 
 // admin routes:
 router.use(verifyIsLoggedIn)
+
 router.get('/admin', adminGetProducts)
 router.delete('/admin/:id', adminDeleteProduct)
 router.delete('/admin/image/:imagePath/:productId', adminDeleteProductImage)
