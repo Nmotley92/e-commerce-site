@@ -1,4 +1,6 @@
 const User = require('../models/userModel')
+const Review = require('../models/ReviewModel')
+const Product = require('../models/ProductModel')
 const { hashPassword, comparePasswords } = require('../utils/hashPassword')
 const generateAuthToken = require('../utils/generateAuthToken')
 
@@ -132,4 +134,54 @@ const updateUserProfile = async (req, res, next) => {
     }
   };
 
-module.exports = { getUsers, registerUser, loginUser, updateUserProfile }
+  const getUserProfile = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.id).orFail();
+        return res.send(user);
+    } catch(err) {
+        next(err)
+    }
+}
+
+  const writeReview = async (req, res, next) => {
+    try {
+        // get comment, rating from request.body:
+        const { comment, rating } = req.body;
+        // validate request:
+        if (!(comment && rating)) {
+            return res.status(400).send("Please fill all fields");
+        }
+
+        // create review id manually because it is needed also for saving in Product collection
+        const ObjectId = require("mongodb").ObjectId;
+        let reviewId = ObjectId();
+
+        await Review.create([
+            {
+                _id: reviewId,
+                comment: comment,
+                rating: Number(rating),
+                user: { _id: req.user._id, name: req.user.name + " " + req.user.lastName },
+            }
+        ])
+
+        const product = await Product.findById(req.params.productId).populate("reviews");
+        let prc = [...product.reviews];
+        prc.push({ rating: rating });
+        product.reviews.push(reviewId);
+        if (product.reviews.length === 1) {
+            product.rating = Number(rating);
+            product.reviewsNumber = 1;
+        } else {
+            product.reviewsNumber = product.reviews.length;
+            product.rating = prc.map((item) => Number(item.rating)).reduce((sum, item) => sum + item, 0) / product.reviews.length;
+        }
+        await product.save();
+
+        res.send('Review created')
+    } catch (err) {
+        next(err)   
+    }
+}
+
+module.exports = { getUsers, registerUser, loginUser, updateUserProfile, getUserProfile, writeReview }
