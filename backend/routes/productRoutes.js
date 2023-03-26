@@ -12,7 +12,7 @@ const {
      adminDeleteProductImage
 } = require('../controllers/productController')
 
-const { verifyIsLoggedIn } = require('../middleware/verifyAuthToken')
+const { verifyIsLoggedIn, verifyIsAdmin } = require('../middleware/verifyAuthToken')
 
 router.get('/', getProducts)
 router.get('/category/:categoryName', getProducts)
@@ -23,7 +23,7 @@ router.get('/get-one/:id', getProductById)
 
 // admin routes:
 router.use(verifyIsLoggedIn)
-
+router.use(verifyIsAdmin)
 router.get('/admin', adminGetProducts)
 router.delete('/admin/:id', adminDeleteProduct)
 router.delete('/admin/image/:imagePath/:productId', adminDeleteProductImage)

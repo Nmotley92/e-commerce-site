@@ -18,4 +18,13 @@ const verifyIsLoggedIn = (req, res, next) => {
     }
 }
 
-module.exports = { verifyIsLoggedIn }
+const verifyIsAdmin = (req, res, next) => {
+    if (req.user.isAdmin && req.user ) {
+        next()
+    }
+    else {
+        return res.status(403).send("You must be an admin to access this page")
+    }
+}
+
+module.exports = { verifyIsLoggedIn, verifyIsAdmin }
