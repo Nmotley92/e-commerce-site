@@ -4,16 +4,20 @@ import AdminLinksComponent from "../../../components/admin/AdminLinksComponent";
 
 import { useState, useEffect } from "react";
 
+import { logout } from "../../../redux/actions/userActions";
+import { useDispatch } from "react-redux";
+
 const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
   const [users, setUsers] = useState([]);
   const [userDeleted, setUserDeleted] = useState(false);
+  const dispatch = useDispatch();
 
   const deleteHandler = async (userId) => {
     if (window.confirm("Are you sure?")) {
-      const data = await deleteUser(userId);
-      if (data === "user removed") {
-        setUserDeleted(!userDeleted);
-      }
+        const data  = await deleteUser(userId);
+        if(data === 'user removed') {
+            setUserDeleted(!userDeleted)
+        }
     }
   };
 
@@ -21,12 +25,12 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
     const abctrl = new AbortController();
     fetchUsers(abctrl)
       .then((res) => setUsers(res))
-      .catch((err) =>
-        console.log(
-          err.response.data.message ? err.response.data.message : err.response.data
-        )
+      .catch((er) =>
+      dispatch(logout())
+        // console.log(
+        //   er.response.data.message ? er.response.data.message : er.response.data
+        // )
       );
-
     return () => abctrl.abort();
   }, [userDeleted]);
 
@@ -49,36 +53,34 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, idx) => (
-              <tr key={idx}>
-                <td>{idx + 1}</td>
-                <td>{user.name}</td>
-                <td>{user.lastName}</td>
-                <td>{user.email}</td>
-                <td>
-                  {user.isAdmin ? (
-                    <i className="bi bi-check-lg text-success"></i>
-                  ) : (
-                    <i className="bi bi-x-lg text-danger"></i>
-                  )}
-                </td>
-                <td>
-                  <LinkContainer to={`/admin/edit-user/${user._id}`}>
-                    <Button className="btn-sm">
-                      <i className="bi bi-pencil-square"></i>
+            {users.map(
+              (user, idx) => (
+                <tr key={idx}>
+                  <td>{idx + 1}</td>
+                  <td>{user.name}</td>
+                  <td>{user.lastName}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    {user.isAdmin ? <i className="bi bi-check-lg text-success"></i> : <i className="bi bi-x-lg text-danger"></i>}
+                  </td>
+                  <td>
+                    <LinkContainer to={`/admin/edit-user/${user._id}`}>
+                      <Button className="btn-sm">
+                        <i className="bi bi-pencil-square"></i>
+                      </Button>
+                    </LinkContainer>
+                    {" / "}
+                    <Button
+                      variant="danger"
+                      className="btn-sm"
+                      onClick={() => deleteHandler(user._id)}
+                    >
+                      <i className="bi bi-x-circle"></i>
                     </Button>
-                  </LinkContainer>
-                  {"/"}
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={() => deleteHandler(user._id)}
-                  >
-                    <i className="bi bi-x-circle"></i>
-                  </Button>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              )
+            )}
           </tbody>
         </Table>
       </Col>
@@ -87,3 +89,4 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
 };
 
 export default UsersPageComponent;
+
