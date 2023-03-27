@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 const OrdersPageComponent = ({ getOrders }) => {
     const [orders, setOrders] = useState([]);
     useEffect(() => {
-        getOrders().then((Orders) => setOrders(orders)).catch(er => 
+        getOrders().then((Orders) => setOrders(orders)).catch(err => 
             console.log(err.response.data.message ? err.response.data.message : err.response.data))
     }, []);
 
@@ -43,7 +43,7 @@ const OrdersPageComponent = ({ getOrders }) => {
                   <td>
                     {order.isDelivered ? <i className="bi bi-check-lg text-success"></i> : <i className="bi bi-x-lg text-danger"></i>}
                   </td>
-                  <td>{order.paymentMethid}</td>
+                  <td>{order.paymentMethod}</td>
                   <td>
                     <Link to={`/admin/order-details/${order._id}`}>go to order</Link>
                   </td>
