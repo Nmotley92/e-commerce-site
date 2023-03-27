@@ -10,7 +10,7 @@ const Header = () => {
                 <LinkContainer to="/">
                     <Navbar.Brand href="/">Shop Name</Navbar.Brand>
                 </LinkContainer>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-dark" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                         <InputGroup>
@@ -21,7 +21,7 @@ const Header = () => {
 
                             </DropdownButton>
                             <Form.Control type="text" placeholder="Search in shop.." />
-                            <Button className="search-btn"><i className="bi bi-search text-dark"></i></Button>
+                            <Button className="search-btn btn btn-outline-secondary"><i className="bi bi-search text-light"></i></Button>
                         </InputGroup>
                     </Nav>
                     <Nav>

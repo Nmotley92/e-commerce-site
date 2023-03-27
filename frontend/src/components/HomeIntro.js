@@ -4,7 +4,7 @@ const HomeIntro = () => {
     return (
         <div
          className='intro-container column'
-         style={{ height: '400px' }}>
+         style={{ height: '350px' }}>
             <div style={{ position: 'absolute' }}>
             <h1>TO SUCCEED</h1>
             <h1>YOU MUST READ</h1>
