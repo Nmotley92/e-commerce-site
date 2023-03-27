@@ -3,15 +3,17 @@ import React from 'react';
 const HomeIntro = () => {
     return (
         <div
-         className='intro-container'
-         style={{ height: '600px' }}>
+         className='intro-container column'
+         style={{ height: '400px' }}>
+            <div style={{ position: 'absolute' }}>
             <h1>TO SUCCEED</h1>
             <h1>YOU MUST READ</h1>
             <p>Explore new worlds from authors</p>
-            <div className="container"
+            </div>
+            <div className="container row"
             style={{ width: '50%', float: 'right' }}>
                 <div className="row"
-                style={{height: '400px'}}>
+                style={{ height: '350px' }}>
                     <img
                         className="col align-self-start"
                         style={{ height: '180px', width: '240px', objectFit: 'contain' }}
