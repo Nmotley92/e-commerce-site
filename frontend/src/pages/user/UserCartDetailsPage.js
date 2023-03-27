@@ -49,8 +49,8 @@ import {
             <h2>Order items</h2>
             <ListGroup variant="flush">
               {Array.from({ length: 3 }).map((item, idx) => (
-                <CartItemComponent item={{image: {path:"/images/tablets-category.png"}, name: "Product Name", price: 10, count: 10, quantity: 10}} key={idx} />
-                ))} 
+                <CartItemComponent key={idx} />
+              ))}
             </ListGroup>
           </Col>
           <Col md={4}>

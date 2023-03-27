@@ -13,8 +13,6 @@ app.get('/', async (req, res, next) => {
   res.json({ message: "API is working" })
 })
 
-//mongodb 
-
 const connectDB = require('./config/db')
 connectDB();
 
