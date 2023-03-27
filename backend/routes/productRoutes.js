@@ -14,10 +14,10 @@ const {
 
 const { verifyIsLoggedIn, verifyIsAdmin } = require('../middleware/verifyAuthToken')
 
-router.get('/', getProducts)
+router.get('/search/:searchQuery', getProducts)
 router.get('/category/:categoryName', getProducts)
 router.get('/category/:categoryName/search/:searchQuery', getProducts)
-router.get('/search/:searchQuery', getProducts)
+router.get('/', getProducts)
 router.get('/bestsellers', getBestsellers)
 router.get('/get-one/:id', getProductById)
 
