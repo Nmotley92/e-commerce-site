@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "react-bootstrap/Spinner";
 
-const LoginPageComponent = ({ loginUserApiRequest }) => {
+const LoginPageComponent = ({ loginUserApiRequest,reduxDispatch, setReduxUserState  }) => {
   const [validated, setValidated] = useState(false);
   const [loginUserResponseState, setLoginUserResponseState] = useState({
     success: "",
@@ -28,7 +28,11 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
         .then((res) => {
             setLoginUserResponseState({ success: res.success, loading: false, error: "" });
 
-            if (res.success === "user logged in" && !res.userLoggedIn.isAdmin) navigate("/user", { replace: true });
+            if (res.userLoggedIn) {
+                reduxDispatch(setReduxUserState(res.userLoggedIn));
+            }
+
+            if (res.success === "User logged in" && !res.userLoggedIn.isAdmin) navigate("/user", { replace: true });
             else navigate("/admin/orders", { replace: true });
 
         })
@@ -97,7 +101,7 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
             <Alert
               show={
                 loginUserResponseState &&
-                loginUserResponseState.error === "wrong credentials"
+                loginUserResponseState.error === "Invalid login credentials"
               }
               variant="danger"
             >
@@ -111,4 +115,3 @@ const LoginPageComponent = ({ loginUserApiRequest }) => {
 };
 
 export default LoginPageComponent;
-
