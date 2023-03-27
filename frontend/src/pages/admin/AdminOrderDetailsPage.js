@@ -1,4 +1,4 @@
-import OrderDetailPageComponent from "./components/OrderDetailPageComponent";
+import OrderDetailPageComponent from "../../components/OrderDetailPageComponent";
 
 import axios from "axios";
 

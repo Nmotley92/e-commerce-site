@@ -7,7 +7,7 @@ import {
     ListGroup,
     Button,
   } from "react-bootstrap";
-  import CartItemComponent from "../../../components/CartItemComponent";
+  import CartItemComponent from "./CartItemComponent";
   import { useParams } from "react-router-dom";
   import { useEffect, useState } from "react";
   
@@ -60,7 +60,7 @@ import {
               </Col>
               <Col md={6}>
                 <h2>Payment method</h2>
-                <Form.Select value={paymentMethid} disabled={true}>
+                <Form.Select value={paymentMethod} disabled={true}>
                   <option value="pp">PayPal</option>
                   <option value="cod">
                     Cash On Delivery (delivery may be delayed)

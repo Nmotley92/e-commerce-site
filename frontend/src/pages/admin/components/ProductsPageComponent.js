@@ -58,7 +58,7 @@ const deleteHandler = async (productId) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {products.map([item, idx] => (
+                        {products.map((item, idx) => (
                             <tr key={idx}>
                                 <td>{idx + 1}</td>
                                 <td>{item.name}</td>
