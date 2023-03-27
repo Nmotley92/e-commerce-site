@@ -1,4 +1,4 @@
-import ProductsPageComponent from "./components/productsPageComponent";
+import ProductsPageComponent from "./components/ProductsPageComponent";
 import axios from "axios";
 
 const fetchProducts = async(abctrl) => {

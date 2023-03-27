@@ -14,7 +14,18 @@ import AddedToCartMessageComponent from "../components/AddedToCartMessageCompone
 import ImageZoom from "js-image-zoom";
 import { useEffect } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/actions/cartActions";
+
 const ProductDetailsPage = () => {
+    const dispatch = useDispatch()
+
+    const addToCartHandler = () => {
+        dispatch(addToCart());
+    }
+
+    const products = useSelector((state) => state.cart.value);
+
     var options = {
         // width: 400,
         // zoomWidth: 500,
@@ -29,9 +40,6 @@ const ProductDetailsPage = () => {
         new ImageZoom(document.getElementById("third"), options);
         new ImageZoom(document.getElementById("fourth"), options);
     });
-
-
-
     return (
         <Container>
             <AddedToCartMessageComponent />
@@ -63,7 +71,7 @@ const ProductDetailsPage = () => {
                         <Col md={8}>
                             <ListGroup variant="flush">
                                 <ListGroup.Item>
-                                    <h1>Product name</h1>
+                                    <h1>Product name {products}</h1>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
                                     <Rating
@@ -101,7 +109,10 @@ const ProductDetailsPage = () => {
                                     </Form.Select>
                                 </ListGroup.Item>
                                 <ListGroup.Item>
-                                    <Button variant="danger">Add to cart</Button>
+                                    <Button onClick={addToCartHandler} variant="danger">
+                                        Add to cart
+                                    </Button>
+
                                 </ListGroup.Item>
                             </ListGroup>
                         </Col>
@@ -135,7 +146,6 @@ const ProductDetailsPage = () => {
                     <Alert variant="danger">Login first to write a review</Alert>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-
                             <Form.Label>Write a review</Form.Label>
                             <Form.Control as="textarea" rows={3} />
                         </Form.Group>
