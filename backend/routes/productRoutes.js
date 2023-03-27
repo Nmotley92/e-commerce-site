@@ -33,4 +33,3 @@ router.post('/admin', adminCreateProduct)
 
 
 module.exports = router
-

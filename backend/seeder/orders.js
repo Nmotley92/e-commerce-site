@@ -23,8 +23,8 @@ const orders = Array.from({length: 22}).map((_, idx) => {
                 name: "Product name",
                 price: 34,
                 image: {path: "/images/tablets-category.png"},
-                quantity: 532,
-                count: 65
+                quantity: 3,
+                count: 12
             }
         ],
         paymentMethod: "PayPal",
