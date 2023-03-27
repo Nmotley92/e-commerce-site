@@ -10,8 +10,8 @@ const getUsers = async (req, res, next) => {
         const users = await User.find({}).select('-password')
         return res.json({ users })
     }
-    catch (err) {
-        next(err)
+    catch (error) {
+        next(error)
     }
 };
 
@@ -50,8 +50,8 @@ const registerUser = async (req, res, next) => {
                     },
                 });
         }
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        next(error)
     }
 };
 
@@ -100,8 +100,8 @@ const loginUser = async (req, res, next) => {
         } else {
             return res.status(401).send('Invalid login credentials')
         }
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        next(error)
     }
 };
 
@@ -133,8 +133,8 @@ const updateUserProfile = async (req, res, next) => {
           isAdmin: user.isAdmin,
         },
       });
-    } catch (err) {
-      next(err);
+    } catch (error) {
+      next(error);
     }
   };
 
@@ -143,8 +143,8 @@ const updateUserProfile = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id).orFail();
         return res.send(user);
-    } catch(err) {
-        next(err)
+    } catch(error) {
+        next(error)
     }
 }
 
@@ -198,9 +198,9 @@ const updateUserProfile = async (req, res, next) => {
         await session.commitTransaction();
         session.endSession();
         res.send('Review created')
-    } catch (err) {
+    } catch (error) {
         await session.abortTransaction();
-        next(err)   
+        next(error)   
     }
 }
 
@@ -208,8 +208,8 @@ const getUser = async (req, res, next) => {
     try {
         const user = await User.findById(req.params.id).select("name lastName email isAdmin").orFail();
         return res.send(user);
-    } catch (err) {
-       next(err); 
+    } catch (error) {
+       next(error); 
     }
 }
 
@@ -222,8 +222,8 @@ const updateUser = async (req, res, next) => {
         user.isAdmin = req.body.isAdmin
         await user.save();
         res.send("user updated");
-    } catch (err) {
-       next(err); 
+    } catch (error) {
+       next(error); 
     }
 }
 
@@ -232,8 +232,8 @@ const deleteUser = async (req, res, next) => {
        const user = await User.findById(req.params.id).orFail();
        await user.remove(); 
        res.send("user removed");
-    } catch (err) {
-        next(err);
+    } catch (error) {
+        next(error);
     }
 }
 
