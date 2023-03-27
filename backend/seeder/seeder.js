@@ -26,6 +26,7 @@ const importData = async () => {
         await User.collection.deleteMany({})
         await Order.collection.deleteMany({})
 
+    if (process.argv[2] !== "-d") {
         await Category.insertMany(categoryData)
         const reviews = await Review.insertMany(reviewData)
         const sampleProducts = productData.map((product) => {
@@ -40,6 +41,10 @@ const importData = async () => {
 
         console.log("Data imported successfully")
         process.exit()
+        return
+    }
+    console.log("Data deleted successfully")
+    process.exit()
     } catch (error) {
         console.error("Failed to import data", error)
         process.exit(1);

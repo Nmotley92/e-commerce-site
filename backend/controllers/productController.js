@@ -108,7 +108,7 @@ const getProducts = async (req, res, next) => {
 
 const getProductById = async (req, res, next) => {
   try {
-    const product = await Product.findById(req.params.id).populate('reviews').orFail();
+    const product = await Product.findById(req.params.id).populate("reviews").orFail();
     res.json(product);
 
   } catch (error) {
@@ -171,8 +171,8 @@ const adminCreateProduct = async (req, res, next) => {
       message: "product created",
       productId: product._id
     })
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 };
 
@@ -197,8 +197,8 @@ const adminUpdateProduct = async (req, res, next) => {
     res.json({
       message: "product updated",
     })
-  } catch (err) {
-    next(err)
+  } catch (error) {
+    next(error)
   }
 };
 
@@ -228,9 +228,9 @@ const adminUpload = async (req, res, next) => {
       var fileName = uuidv4() + path.extname(image.name);
       var uploadPath = uploadDirectory + '/' + fileName
       product.images.push({ path: '/images/products/' + fileName })
-      image.mv(uploadPath, function (err) {
-        if (err) {
-          return res.status(500).send(err);
+      image.mv(uploadPath, function (error) {
+        if (error) {
+          return res.status(500).send(error);
         }
       })
     }
@@ -248,9 +248,9 @@ const adminDeleteProductImage = async (req, res, next) => {
     const finalPath = path.resolve("../frontend/public") + imagePath;
 
     const fs = require("fs");
-    fs.unlink(finalPath, (err) => {
-      if (err) {
-        res.status(500).send(err);
+    fs.unlink(finalPath, (error) => {
+      if (error) {
+        res.status(500).send(error);
       }
     });
     await Product.findOneAndUpdate(
@@ -258,8 +258,8 @@ const adminDeleteProductImage = async (req, res, next) => {
       { $pull: { images: { path: imagePath } } }
     ).orFail();
     return res.end();
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 
