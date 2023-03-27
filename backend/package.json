@@ -6,7 +6,14 @@
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node seeder/seeder.js -i"
+    "seed": "node seeder/seeder.js -i",
+    "server-prod": "node server.js",
+    "server-dev": "npx nodemon server.js",
+    "client": "npm start --prefix ../frontend",
+    "kill": "fuser -k 3000/tcp",
+    "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\"",
+    "seed:data": "node seeder/seeder",
+    "seed:data-d": "node seeder/seeder -d"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +28,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
   }
 }
