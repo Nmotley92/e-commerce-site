@@ -1,6 +1,21 @@
 import "../../chats.css";
+import { useEffect, useState } from "react";
+import socketIOClient from "socket.io-client";
 
 const UserChat = () => {
+  const [socket, setSocket] = useState(false);
+  useEffect(() => {
+      const socket = socketIOClient();
+      setSocket(socket);
+      return () => socket.disconnect();
+  }, [])
+
+  const clientSubmitChatMsg = (e) => {
+      if (e.keyCode && e.keyCode !== 13) {
+          return
+      }
+      socket.emit("client sends message", "message from client");
+  }
     return (
         <>
         <input type="checkbox" id="check" />

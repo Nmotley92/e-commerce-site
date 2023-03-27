@@ -13,6 +13,12 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(fileUpload())
 
+io.on("connection", (socket) => {
+  socket.on("client sends message", (msg) => {
+      console.log(msg);
+  })
+})
+
 app.get('/', async (req, res, next) => {
   res.json({ message: "API is working" })
 })
