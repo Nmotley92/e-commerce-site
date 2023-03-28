@@ -1,4 +1,4 @@
-html {
+/* html {
   position: relative;
   min-height: 100%;
 }
@@ -29,12 +29,14 @@ footer {
 
 .nav-link,
 .navbar-brand:hover,
-.navbar-brand:active,
-.nav-link:active {
+.navbar-brand.active,
+.navbar-light .navbar-nav .nav-link.active,
+#collasible-nav-dropdown.dropdown-toggle.nav-link {
   color: white;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+#collasible-nav-dropdown.dropdown-toggle.nav-link:hover {
   color: gray;
 }
 
@@ -79,4 +81,4 @@ footer {
 
 .custom-rating .fas {
   color: #f5c518;
-}
+} */
