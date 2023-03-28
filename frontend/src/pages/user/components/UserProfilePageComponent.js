@@ -10,10 +10,13 @@ const UserProfilePageComponent = ({ updateUserApiRequest, fetchUser, userInfoFro
   const userInfo = userInfoFromRedux;
 
   useEffect(() => {
-      fetchUser(userInfo._id)
-      .then((data) => setUser(data))
-      .catch((er) => console.log(er));
-  }, [userInfo._id])
+    if (userInfoFromRedux?._id) {
+      fetchUser(userInfoFromRedux._id)
+        .then((data) => setUser(data))
+        .catch((er) => console.log(er));
+    }
+  }, [userInfoFromRedux?._id])
+  
 
   const onChange = () => {
     const password = document.querySelector("input[name=password]");
