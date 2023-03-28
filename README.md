@@ -7,8 +7,8 @@ React is a JavaScript library for building user interfaces that provides a compo
 Node.js is a JavaScript runtime environment that allows developers to build high-performance applications using JavaScript.
 
 ## Technologies Used
-Front-End: Html, CSS, JavaScript, React, Bootstrap
-Back-End: Node, Express, MongoDB
+### Front-End: Html, CSS, JavaScript, React, Bootstrap
+### Back-End: Node, Express, MongoDB
 
 ## Usage
 
