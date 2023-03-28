@@ -40,7 +40,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
-    attributes: [
+    attrs: [
         { key: { type: String }, value: { type: String } }
     ],
     images: [
@@ -68,8 +68,8 @@ productSchema.index({
 });
 
 productSchema.index({
-    'attributes.key': 1,
-    'attributes.value': 1,
+    'attrs.key': 1,
+    'attrs.value': 1,
 });
 
 module.exports = Product;

@@ -24,8 +24,8 @@ const newCategory = async (req, res, next) => {
             })
             res.status(201).send({categoryCreated: categoryCreated})
         }
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        next(error)
     }
 }
 
@@ -39,8 +39,8 @@ const deleteCategory = async (req, res, next) => {
             await categoryExists.remove()
             res.json({categoryDeleted: true})
         }
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        next(error)
     }
 }
 
@@ -75,8 +75,8 @@ const saveAttr = async (req, res, next) => {
         await categoryExists.save()
         let cat = await Category.find({}).sort({name: "asc"})
         return res.status(201).json({categoriesUpdated: cat})
-    } catch(err) {
-        next(err)
+    } catch(error) {
+        next(error)
     }
 }
 
