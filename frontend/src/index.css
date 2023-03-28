@@ -1,4 +1,4 @@
-/* html {
+html {
   position: relative;
   min-height: 100%;
 }
@@ -41,6 +41,7 @@ footer {
 }
 
 .category-container,
+.carousel-caption,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -75,7 +76,7 @@ footer {
   border-radius: 10%;
 }
 
-.carousel-caption {
+/* .carousel-caption {
   font-family: 'Libre Caslon Text', sans-serif;
 } */
 
