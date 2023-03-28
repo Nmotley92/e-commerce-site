@@ -4,10 +4,12 @@ import thunk from "redux-thunk";
 
 import { cartReducer } from "./reducers/cartReducers";
 import { userRegisterLoginReducer } from './reducers/userReducers';
+import { getCategoriesReducer } from "./reducers/categoryReducers";
 
 const reducer = combineReducers({
     cart: cartReducer,
-    userRegisterLogin: userRegisterLoginReducer 
+    userRegisterLogin: userRegisterLoginReducer,
+    getCategories: getCategoriesReducer, 
 })
 
 const cartItemsInLocalStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];

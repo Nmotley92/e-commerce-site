@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import HomeIntro from '../components/HomeIntro';
+import HomeIntro from './HomeIntro';
 
 describe('HomeIntro', () => {
   it('should render the intro text', () => {

@@ -83,7 +83,7 @@ const categories = [
     name: "True crime",
     description: "Like an episode of Unsolved Mysteries or 60 Minutes, true-crime books read like thrillers or murder mysteries.",
     image: "frontend/public/images/truecrime-books.webp"
-  }
+  },
 ];
 
 
