@@ -3,13 +3,14 @@ import { useSelector } from "react-redux";
 import axios from 'axios'
 import { loadScript } from "@paypal/paypal-js";
 
+
 const getOrder = async (orderId) => {
     const { data } = await axios.get("/api/orders/user/" + orderId);
     return data;
 }
 
 const loadPayPalScript = (cartSubtotal, cartItems, orderId, updateStateAfterOrder) => {
-    loadScript({"client-id": "AZgm34OkpoScZ-y4-1lVYyIMUC2WRN6liZTGTU6kw6oI9kCLloMvBRtONJyKlj7cMYy4dHnJTJZ30fxT"})
+    loadScript({"client-id": 'AZgm34OkpoScZ-y4-1lVYyIMUC2WRN6liZTGTU6kw6oI9kCLloMvBRtONJyKlj7cMYy4dHnJTJZ30fxT'})
     .then(paypal => {
         paypal
         .Buttons(buttons(cartSubtotal, cartItems, orderId, updateStateAfterOrder))
