@@ -2,10 +2,27 @@ import { Navbar, Nav, NavDropdown, Container, Badge, Form, Dropdown, DropdownBut
 import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import { logout } from "../redux/actions/userActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import socketIOClient from "socket.io-client";
+import { useEffect } from "react";
+import { setChatRooms } from '../redux/actions/chatActions';
 
 const Header = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userRegisterLogin);
+
+  useEffect(() => {
+    if (userInfo.isAdmin) {
+      const socket = socketIOClient();
+      socket.on("server sends message from client to admin", ({ message }) => {
+        //   let chatRooms = {
+        //     fddf54gfgfSocketID: [{ "client": "dsfdf" }, { "client": "dsfdf" }, { "admin": "dsfdf" }],
+        //   };
+        dispatch(setChatRooms("exampleUser", message));
+      })
+    }
+  }, [userInfo.isAdmin])
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>

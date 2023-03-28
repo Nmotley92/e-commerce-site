@@ -1,10 +1,11 @@
 const express = require('express')
 const fileUpload = require('express-fileupload')
 const app = express()
-const apiRoutes = require('./routes/apiRoutes')
 const cookieParser = require('cookie-parser')
 const { createServer } = require('http')
 const { Server } = require('socket.io')
+
+
 
 const httpServer = createServer(app)
 global.io = new Server(httpServer)
@@ -15,9 +16,13 @@ app.use(fileUpload())
 
 io.on("connection", (socket) => {
   socket.on("client sends message", (msg) => {
-      console.log(msg);
+      socket.broadcast.emit("server sends message from client to admin", {
+         message: msg, 
+      })
   })
 })
+
+const apiRoutes = require('./routes/apiRoutes')
 
 app.get('/', async (req, res, next) => {
   res.json({ message: "API is working" })
@@ -51,4 +56,4 @@ app.use((error, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-httpServer.listen(port, () => {console.log(`Server running on port ${port}`)})
+httpServer.listen(PORT, () => {console.log(`Server running on port ${PORT}`)})

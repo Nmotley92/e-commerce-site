@@ -4,10 +4,12 @@ import thunk from "redux-thunk";
 
 import { counterReducer } from "./reducers/cartReducers";
 import { userRegisterLoginReducer } from './reducers/userReducers';
+import { adminChatReducer } from "./reducers/adminChatReducers";
 
 const reducer = combineReducers({
     cart: counterReducer,
-    userRegisterLogin: userRegisterLoginReducer 
+    userRegisterLogin: userRegisterLoginReducer,
+    adminChat: adminChatReducer
 })
 
 const userInfoInLocalStorage = localStorage.getItem("userInfo")
