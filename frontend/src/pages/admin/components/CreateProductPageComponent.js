@@ -7,70 +7,47 @@ import {
   CloseButton,
   Table,
   Alert,
-  Image,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState, useEffect, Fragment, useRef } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { changeCategory, setValuesForAttrFromDbSelectForm, setAttributesTableWrapper } from "./utils/utils";
 
-const onHover = {
-  cursor: "pointer",
-  position: "absolute",
-  left: "5px",
-  top: "-10px",
-  transform: "scale(2.7)",
-};
-
-const EditProductPageComponent = ({
-  categories,
-  fetchProduct,
-  updateProductApiRequest,
-  reduxDispatch,
-  saveAttributeToCatDoc,
-  imageDeleteHandler,
-  uploadHandler,
+const CreateProductPageComponent = ({
+  createProductApiRequest,
   uploadImagesApiRequest,
-  uploadImagesCloudinaryApiRequest
+  uploadImagesCloudinaryApiRequest,
+  categories,
+  reduxDispatch,
+  newCategory,
+  deleteCategory,
+  saveAttributeToCatDoc
 }) => {
   const [validated, setValidated] = useState(false);
-  const [product, setProduct] = useState({});
-  const [updateProductResponseState, setUpdateProductResponseState] = useState({
+  const [attributesTable, setAttributesTable] = useState([]);
+  const [attributesFromDb, setAttributesFromDb] = useState([]);
+  const [images, setImages] = useState(false);
+  const [isCreating, setIsCreating] = useState("");
+  const [createProductResponseState, setCreateProductResponseState] = useState({
     message: "",
     error: "",
   });
-  const [attributesFromDb, setAttributesFromDb] = useState([]); // for select lists
-  const [attributesTable, setAttributesTable] = useState([]); // for html table
   const [categoryChoosen, setCategoryChoosen] = useState("Choose category");
+
   const [newAttrKey, setNewAttrKey] = useState(false);
   const [newAttrValue, setNewAttrValue] = useState(false);
-  const [imageRemoved, setImageRemoved] = useState(false)
-  const [isUploading, setIsUploading] = useState("");
-  const [imageUploaded, setImageUploaded] = useState(false);
 
   const attrVal = useRef(null);
   const attrKey = useRef(null);
   const createNewAttrKey = useRef(null);
   const createNewAttrVal = useRef(null);
 
-  
-
-  const { id } = useParams();
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchProduct(id)
-      .then((product) => setProduct(product))
-      .catch((er) => console.log(er));
-  }, [id, imageRemoved, imageUploaded]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     event.stopPropagation();
     const form = event.currentTarget.elements;
-
     const formInputs = {
       name: form.name.value,
       description: form.description.value,
@@ -79,47 +56,64 @@ const EditProductPageComponent = ({
       category: form.category.value,
       attributesTable: attributesTable,
     };
-
     if (event.currentTarget.checkValidity() === true) {
-      updateProductApiRequest(id, formInputs)
+      if (images.length > 3) {
+        setIsCreating("to many files");
+        return;
+      }
+      createProductApiRequest(formInputs)
         .then((data) => {
-          if (data.message === "product updated") navigate("/admin/products");
+          if (images) {
+            if (process.env.NODE_ENV !== "production") {
+              // to do: change to !==
+              uploadImagesApiRequest(images, data.productId)
+                .then((res) => {})
+                .catch((er) =>
+                  setIsCreating(
+                    er.response.data.message
+                      ? er.response.data.message
+                      : er.response.data
+                  )
+                );
+            } else {
+              uploadImagesCloudinaryApiRequest(images, data.productId);
+            }
+          }
+          if (data.message === "product created") navigate("/admin/products");
         })
-        .catch((er) =>
-          setUpdateProductResponseState({
+        .catch((er) => {
+          setCreateProductResponseState({
             error: er.response.data.message
               ? er.response.data.message
               : er.response.data,
-          })
-        );
+          });
+        });
     }
 
     setValidated(true);
   };
 
-  useEffect(() => {
-    let categoryOfEditedProduct = categories.find(
-      (item) => item.name === product.category
-    );
-    if (categoryOfEditedProduct) {
-      const mainCategoryOfEditedProduct =
-        categoryOfEditedProduct.name.split("/")[0];
-      const mainCategoryOfEditedProductAllData = categories.find(
-        (categoryOfEditedProduct) =>
-          categoryOfEditedProduct.name === mainCategoryOfEditedProduct
-      );
-      if (
-        mainCategoryOfEditedProductAllData &&
-        mainCategoryOfEditedProductAllData.attrs.length > 0
-      ) {
-        setAttributesFromDb(mainCategoryOfEditedProductAllData.attrs);
-      }
-    }
-    setCategoryChoosen(product.category);
-    setAttributesTable(product.attrs);
-  }, [product]);
+  const uploadHandler = (images) => {
+    setImages(images);
+  };
 
-  
+  const newCategoryHandler = (e) => {
+    if (e.keyCode && e.keyCode === 13 && e.target.value) {
+      reduxDispatch(newCategory(e.target.value));
+      setTimeout(() => {
+        let element = document.getElementById("cats");
+        setCategoryChoosen(e.target.value);
+        element.value = e.target.value;
+        e.target.value = "";
+      }, 200);
+    }
+  };
+
+  const deleteCategoryHandler = () => {
+    let element = document.getElementById("cats");
+    reduxDispatch(deleteCategory(element.value));
+    setCategoryChoosen("Choose category");
+  };
 
   const attributeValueSelected = (e) => {
       if (e.target.value !== "Choose attribute value") {
@@ -127,14 +121,8 @@ const EditProductPageComponent = ({
       }
   }
 
-  
-
   const deleteAttribute = (key) => {
       setAttributesTable((table) => table.filter((item) => item.key !== key));
-  }
-
-  const checkKeyDown = (e) => {
-      if (e.code === "Enter") e.preventDefault();
   }
 
   const newAttrKeyHandler = (e) => {
@@ -147,20 +135,26 @@ const EditProductPageComponent = ({
       e.preventDefault();
       setNewAttrValue(e.target.value);
       addNewAttributeManually(e);
+
   }
 
   const addNewAttributeManually = (e) => {
       if (e.keyCode && e.keyCode === 13) {
-          if (newAttrKey && newAttrValue) {
+           if (newAttrKey && newAttrValue) {
               reduxDispatch(saveAttributeToCatDoc(newAttrKey, newAttrValue, categoryChoosen));
-             setAttributesTableWrapper(newAttrKey, newAttrValue, setAttributesTable);
-             e.target.value = "";
-             createNewAttrKey.current.value = "";
-             createNewAttrVal.current.value = "";
-             setNewAttrKey(false);
-             setNewAttrValue(false);
-          }
+               setAttributesTableWrapper(newAttrKey, newAttrValue, setAttributesTable);
+               e.target.value = "";
+               createNewAttrKey.current.value = "";
+               createNewAttrVal.current.value = "";
+               setNewAttrKey(false);
+               setNewAttrValue(false);
+           }
+
       }
+  }
+
+  const checkKeyDown = (e) => {
+      if (e.code === "Enter") e.preventDefault();
   }
 
   return (
@@ -172,16 +166,11 @@ const EditProductPageComponent = ({
           </Link>
         </Col>
         <Col md={6}>
-          <h1>Edit product</h1>
-          <Form noValidate validated={validated} onSubmit={handleSubmit} onKeyDown={(e) => checkKeyDown(e)}>
+          <h1>Create a new product</h1>
+          <Form noValidate validated={validated} onSubmit={handleSubmit} onKeyDown={(e) => checkKeyDown(e)} >
             <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Label>Name</Form.Label>
-              <Form.Control
-                name="name"
-                required
-                type="text"
-                defaultValue={product.name}
-              />
+              <Form.Control name="name" required type="text" />
             </Form.Group>
 
             <Form.Group
@@ -194,48 +183,54 @@ const EditProductPageComponent = ({
                 required
                 as="textarea"
                 rows={3}
-                defaultValue={product.description}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCount">
               <Form.Label>Count in stock</Form.Label>
-              <Form.Control
-                name="count"
-                required
-                type="number"
-                defaultValue={product.count}
-              />
+              <Form.Control name="count" required type="number" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPrice">
               <Form.Label>Price</Form.Label>
-              <Form.Control
-                name="price"
-                required
-                type="text"
-                defaultValue={product.price}
-              />
+              <Form.Control name="price" required type="text" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicCategory">
-              <Form.Label>Category</Form.Label>
+              <Form.Label>
+                Category
+                <CloseButton onClick={deleteCategoryHandler} />(
+                <small>remove selected</small>)
+              </Form.Label>
               <Form.Select
+                id="cats"
                 required
                 name="category"
                 aria-label="Default select example"
-                onChange={(e) => changeCategory(e, categories, setAttributesFromDb, setCategoryChoosen)}
+                onChange={(e) =>
+                  changeCategory(
+                    e,
+                    categories,
+                    setAttributesFromDb,
+                    setCategoryChoosen
+                  )
+                }
               >
-                <option value="Choose category">Choose category</option>
-                {categories.map((category, idx) => {
-                  return product.category === category.name ? (
-                    <option selected key={idx} value={category.name}>
-                      {category.name}
-                    </option>
-                  ) : (
-                    <option key={idx} value={category.name}>
-                      {category.name}
-                    </option>
-                  );
-                })}
+                <option value="">Choose category</option>
+                {categories.map((category, idx) => (
+                  <option key={idx} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
               </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicNewCategory">
+              <Form.Label>
+                Or create a new category (e.g. Computers/Laptops/Intel){" "}
+              </Form.Label>
+              <Form.Control
+                onKeyUp={newCategoryHandler}
+                name="newCategory"
+                type="text"
+              />
             </Form.Group>
 
             {attributesFromDb.length > 0 && (
@@ -251,9 +246,9 @@ const EditProductPageComponent = ({
                     >
                       <option>Choose attribute</option>
                       {attributesFromDb.map((item, idx) => (
-                        <Fragment key={idx}>
+                        <React.Fragment key={idx}>
                           <option value={item.key}>{item.key}</option>
-                        </Fragment>
+                        </React.Fragment>
                       ))}
                     </Form.Select>
                   </Form.Group>
@@ -265,10 +260,10 @@ const EditProductPageComponent = ({
                   >
                     <Form.Label>Attribute value</Form.Label>
                     <Form.Select
+                    onChange={attributeValueSelected}
                       name="atrrVal"
                       aria-label="Default select example"
                       ref={attrVal}
-                      onChange={attributeValueSelected}
                     >
                       <option>Choose attribute value</option>
                     </Form.Select>
@@ -278,7 +273,7 @@ const EditProductPageComponent = ({
             )}
 
             <Row>
-              {attributesTable && attributesTable.length > 0 && (
+              {attributesTable.length > 0 && (
                 <Table hover>
                   <thead>
                     <tr>
@@ -308,12 +303,11 @@ const EditProductPageComponent = ({
                   <Form.Label>Create new attribute</Form.Label>
                   <Form.Control
                   ref={createNewAttrKey}
-                    disabled={categoryChoosen === "Choose category"}
+                    disabled={["", "Choose category"].includes(categoryChoosen)}
                     placeholder="first choose or create category"
-                    name="newAttrKey"
+                    name="newAttrValue"
                     type="text"
                     onKeyUp={newAttrKeyHandler}
-                    required={newAttrValue}
                   />
                 </Form.Group>
               </Col>
@@ -325,7 +319,7 @@ const EditProductPageComponent = ({
                   <Form.Label>Attribute value</Form.Label>
                   <Form.Control
                   ref={createNewAttrVal}
-                    disabled={categoryChoosen === "Choose category"}
+                    disabled={["", "Choose category"].includes(categoryChoosen)}
                     placeholder="first choose or create category"
                     required={newAttrKey}
                     name="newAttrValue"
@@ -343,43 +337,19 @@ const EditProductPageComponent = ({
 
             <Form.Group controlId="formFileMultiple" className="mb-3 mt-3">
               <Form.Label>Images</Form.Label>
-              <Row>
-                {product.images &&
-                  product.images.map((image, idx) => (
-                    <Col key={idx} style={{ position: "relative" }} xs={3}>
-                      <Image
-                        crossOrigin="anonymous"
-                        src={image.path ?? null}
-                        fluid
-                      />
-                      <i style={onHover} onClick={() => imageDeleteHandler(image.path, id).then(data => setImageRemoved(!imageRemoved))} className="bi bi-x text-danger"></i>
-                    </Col>
-                  ))}
-              </Row>
-              <Form.Control  type="file" multiple onChange={e => {
-                 setIsUploading("upload files in progress ..."); 
-                 if (process.env.NODE_ENV !== "production") {
-                     // to do: change to !==
-                     uploadImagesApiRequest(e.target.files, id)
-                     .then(data => {
-                         setIsUploading("upload file completed");
-                         setImageUploaded(!imageUploaded);
-                     })
-                      .catch((er) => setIsUploading(er.response.data.message ? er.response.data.message : er.response.data));
-                 } else {
-                     uploadImagesCloudinaryApiRequest(e.target.files, id);
-                      setIsUploading("upload file completed. wait for the result take effect, refresh also if neccassry");
-                      setTimeout(()=> {
-                          setImageUploaded(!imageUploaded);
-                      }, 5000)
-                 }
-              }} />
-               {isUploading}
+
+              <Form.Control
+                required
+                type="file"
+                multiple
+                onChange={(e) => uploadHandler(e.target.files)}
+              />
+              {isCreating}
             </Form.Group>
             <Button variant="primary" type="submit">
-              UPDATE
+              Create
             </Button>
-            {updateProductResponseState.error ?? ""}
+            {createProductResponseState.error ?? ""}
           </Form>
         </Col>
       </Row>
@@ -387,5 +357,5 @@ const EditProductPageComponent = ({
   );
 };
 
-export default EditProductPageComponent;
+export default CreateProductPageComponent;
 

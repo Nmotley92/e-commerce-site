@@ -15,8 +15,10 @@ const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
   const deleteHandler = async (productId) => {
     if (window.confirm("Are you sure?")) {
         const data = await deleteProduct(productId)
-        if (data.message === "product removed") {
+        console.log(data);
+        if (data.message === "Product deleted") {
             setProductDeleted(!productDeleted);
+            
         }
     }
   };

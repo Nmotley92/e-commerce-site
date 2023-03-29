@@ -7,6 +7,21 @@ export const getCategoriesReducer = (state = { categories: [] }, action) => {
                ...state,
                categories: action.payload,
            }
+        case actionTypes.SAVE_ATTR:
+            return {
+                ...state,
+                categories: action.payload,
+            }
+        case actionTypes.INSERT_CATEGORY:
+            return {
+                ...state,
+                categories: action.payload,
+            }
+        case actionTypes.DELETE_CATEGORY:
+            return {
+               ...state,
+               categories: action.payload,
+            }
         default:
             return state;
     }
