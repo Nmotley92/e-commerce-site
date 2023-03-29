@@ -231,6 +231,10 @@ const products = [
     rating: 5,
     reviewsNumber: 5,
     reviews: [],
+    attrs: [
+      { key: "color", value: "black" },
+      { key: "RAM", value: "1 TB" },
+    ],
   },
   {
     name: "Product15 Game Name Lorem ipsum dolor sit amet",

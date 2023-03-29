@@ -41,10 +41,17 @@ function App() {
     <ScrollToTop />
       <HeaderComponent />
       <Routes>
-        <Route element={<RoutesWithUserChatComponent />}>
+      <Route element={<RoutesWithUserChatComponent />}>
           {/* publicly available routes: */}
           <Route path="/" element={<HomePage />} />
           <Route path="/product-list" element={<ProductListPage />} />
+          <Route path="/product-list/:pageNumParam" element={<ProductListPage />} />
+          <Route path="/product-list/category/:categoryName" element={<ProductListPage />} />
+          <Route path="/product-list/category/:categoryName/:pageNumParam" element={<ProductListPage />} />
+          <Route path="/product-list/search/:searchQuery" element={<ProductListPage />} />
+          <Route path="/product-list/search/:searchQuery/:pageNumParam" element={<ProductListPage />} />
+          <Route path="/product-list/category/:categoryName/search/:searchQuery" element={<ProductListPage />} />
+          <Route path="/product-list/category/:categoryName/search/:searchQuery/:pageNumParam" element={<ProductListPage />} />
           <Route path="/product-details/:id" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -67,14 +74,14 @@ function App() {
         {/* admin protected routes: */}
         <Route element={<ProtectedRoutesComponent admin={true} />}>
           <Route path="/admin/users" element={<AdminUsersPage />} />
-          <Route path="/admin/edit-user" element={<AdminEditUserPage />} />
+          <Route path="/admin/edit-user/:id" element={<AdminEditUserPage />} />
           <Route path="/admin/products" element={<AdminProductsPage />} />
           <Route
             path="/admin/create-new-product"
             element={<AdminCreateProductPage />}
           />
           <Route
-            path="/admin/edit-product"
+            path="/admin/edit-product/:id"
             element={<AdminEditProductPage />}
           />
           <Route path="/admin/orders" element={<AdminOrdersPage />} />
@@ -92,4 +99,3 @@ function App() {
 }
 
 export default App;
-
