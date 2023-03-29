@@ -17,6 +17,7 @@ const UserProfilePageComponent = ({ updateUserApiRequest, fetchUser, userInfoFro
     }
   }, [userInfoFromRedux?._id])
   
+  
 
   const onChange = () => {
     const password = document.querySelector("input[name=password]");

@@ -10,6 +10,10 @@ const Header = () => {
     const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.userRegisterLogin);
     const itemsCount = useSelector((state) => state.cart.itemsCount);
+  
+    
+    
+    
 
     useEffect(() => {
        dispatch(getCategories()); 
@@ -37,14 +41,14 @@ const Header = () => {
             </InputGroup>
           </Nav>
           <Nav>
-            {userInfo.isAdmin ? (
+            {userInfo?.isAdmin ? (
               <LinkContainer to="/admin/orders">
                 <Nav.Link>
                   Admin
                   <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
                 </Nav.Link>
               </LinkContainer>
-            ) : userInfo.name && !userInfo.isAdmin ? (
+            ) : userInfo?.name && !userInfo?.isAdmin ? (
               <NavDropdown title={`${userInfo.name} ${userInfo.lastName}`} id="collasible-nav-dropdown">
                 <NavDropdown.Item
                   eventKey="/user/my-orders"
