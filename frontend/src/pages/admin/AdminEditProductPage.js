@@ -26,7 +26,7 @@ const AdminEditProductPage = () => {
 
   const imageDeleteHandler = async (imagePath, productId) => {
       let encoded = encodeURIComponent(imagePath)
-      if (process.env.NODE_ENV === "production") {
+      if (process.env.NODE_ENV !== "production") {
           // to do: change to !==
       await axios.delete(`/api/products/admin/image/${encoded}/${productId}`);
       } else {

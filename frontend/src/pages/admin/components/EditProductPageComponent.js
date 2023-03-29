@@ -108,10 +108,8 @@ const EditProductPageComponent = ({
         (categoryOfEditedProduct) =>
           categoryOfEditedProduct.name === mainCategoryOfEditedProduct
       );
-      if (
-        mainCategoryOfEditedProductAllData &&
-        mainCategoryOfEditedProductAllData.attrs.length > 0
-      ) {
+      if (mainCategoryOfEditedProductAllData && mainCategoryOfEditedProductAllData.attrs && mainCategoryOfEditedProductAllData.attrs.length > 0) {
+
         setAttributesFromDb(mainCategoryOfEditedProductAllData.attrs);
       }
     }
@@ -238,7 +236,8 @@ const EditProductPageComponent = ({
               </Form.Select>
             </Form.Group>
 
-            {attributesFromDb.length > 0 && (
+            {attributesFromDb && attributesFromDb.length > 0 && (
+
               <Row className="mt-5">
                 <Col md={6}>
                   <Form.Group className="mb-3" controlId="formBasicAttributes">
