@@ -1,7 +1,7 @@
 const express = require('express')
 const fileUpload = require('express-fileupload')
 const app = express()
-const port = 5000
+const port = 5001
 const apiRoutes = require('./routes/apiRoutes')
 const cookieParser = require('cookie-parser')
 

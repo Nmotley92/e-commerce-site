@@ -38,7 +38,7 @@ const Header = () => {
   }
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg">
       <Container>
         <LinkContainer to="/">
           <Navbar.Brand href="/">BEST ONLINE SHOP</Navbar.Brand>
@@ -54,8 +54,8 @@ const Header = () => {
                 ))}
               </DropdownButton>
               <Form.Control onKeyUp={submitHandler} onChange={(e) => setSearchQuery(e.target.value)} type="text" placeholder="Search in shop ..." />
-              <Button onClick={submitHandler} variant="warning">
-                <i className="bi bi-search text-dark"></i>
+              <Button onClick={submitHandler} className="btn btn-secondary">
+                <i className="bi bi-search"></i>
               </Button>
             </InputGroup>
           </Nav>
