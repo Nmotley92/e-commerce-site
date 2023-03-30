@@ -77,10 +77,20 @@ socket.on("admin disconnect", (socketId) => {
 
 const apiRoutes = require('./routes/apiRoutes')
 
-app.get('/', async (req, res, next) => {
-  res.json({ message: "API is working" })
-})
+// app.get('/', async (req, res, next) => {
+//   res.json({ message: "API is working" })
+// })
 
+const path = require('path');
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/build'))); 
+  app.get('*', (req, res) => 
+    res.sendFile(path.resolve(__dirname, '../frontend', 'build', 'index.html')))
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is running...')
+  })
+};
 //mongodb 
 
 const connectDB = require('./config/db')
