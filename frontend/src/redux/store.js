@@ -8,7 +8,7 @@ import { adminChatReducer } from "./reducers/adminChatReducers";
 import { getCategoriesReducer } from "./reducers/categoryReducers";
 
 const reducer = combineReducers({
-    cart: counterReducer,
+    cart: cartReducer,
     userRegisterLogin: userRegisterLoginReducer,
     adminChat: adminChatReducer,
     getCategories: getCategoriesReducer, 

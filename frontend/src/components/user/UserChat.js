@@ -20,11 +20,11 @@ const UserChat = () => {
   useEffect(() => {
     if (!userInfo.isAdmin) {
         setReconnect(false);
-         var audio = new Audio("/audio/chat-msg.mp3");
+         var audio = new Audio("/audio/ping-82822.mp3");
       const socket = socketIOClient();
       socket.on("no admin", (msg) => {
           setChat((chat) => {
-              return [...chat, { admin: "no admin here now" }];
+              return [...chat, { admin: "no admin is available" }];
           })
       })
       socket.on("server sends message from admin to client", (msg) => {
@@ -37,9 +37,9 @@ const UserChat = () => {
           chatMessages.scrollTop = chatMessages.scrollHeight;
       })
       setSocket(socket);
-      socket.on("admin closed chat", () => {
+      socket.on("admin disconnected", () => {
          setChat([]); 
-         setChatConnectionInfo("Admin closed chat. Type something and submit to reconnect");
+         setChatConnectionInfo("Admin disconnected. If you still need help please send a new message.");
          setReconnect(true);
       })
       return () => socket.disconnect();
@@ -74,25 +74,28 @@ const UserChat = () => {
         <input type="checkbox" id="check" />
         <label className="chat-btn" htmlFor="check">
           <i className="bi bi-chat-dots comment"></i>
+          {messageReceived && 
           <span className="position-absolute top-0 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+          }
           <i className="bi bi-x-circle close"></i>
         </label>
         <div className="chat-wrapper">
           <div className="chat-header">
-            <h6>Questions? we are here to help</h6>
+            <h6>Questions? We're here to help</h6>
           </div>
           <div className="chat-form">
             <div className="cht-msg">
+              <p>{chatConnectionInfo}</p>
             {chat.map((item, id) => (
               <div key={id}>
                 {item.client && (
                   <p>
-                    <b>You wrote:</b>
+                    <b>You wrote:</b> {item.client}
                   </p>
                   )}
                   {item.admin && (
                   <p className="bg-primary p-3 ms-4 text-light rounded-pill">
-                    <b>Support wrote:</b> 
+                    <b>Support wrote:</b> {item.admin}
                   </p>
                   )}
                 </div>
