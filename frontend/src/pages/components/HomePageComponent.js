@@ -4,6 +4,8 @@ import { Row, Container } from "react-bootstrap";
 import HomeIntro from "../../components/HomeIntro";
 import { useEffect, useState } from "react";
 
+import MetaComponent from "../../components/MetaComponent";
+
 const HomePageComponent = ({ categories }) => {
     const [mainCategories, setMainCategories] = useState([]);
     useEffect(() => {
@@ -12,6 +14,7 @@ const HomePageComponent = ({ categories }) => {
   
   return (
     <>
+    <MetaComponent/>
       <CarouselComponent />
       <HomeIntro />
       <Container className="category-container">
