@@ -4,8 +4,6 @@ const express = require('express')
 const fileUpload = require('express-fileupload')
 const app = express()
 
-const port = 5001
-const apiRoutes = require('./routes/apiRoutes')
 const cookieParser = require('cookie-parser')
 const { createServer } = require('http')
 const { Server } = require('socket.io')
@@ -123,6 +121,6 @@ app.use((error, req, res, next) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 httpServer.listen(PORT, () => { console.log(`Server running on port ${PORT}`) })
