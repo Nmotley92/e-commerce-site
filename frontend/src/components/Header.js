@@ -3,6 +3,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import socketIOClient from "socket.io-client";
+import { setChatRooms,setSocket, setMessageReceived, removeChatRoom } from '../redux/actions/chatActions';
 import { useEffect, useState } from "react";
 import { getCategories } from "../redux/actions/categoryActions";
 
@@ -11,11 +13,13 @@ const Header = () => {
   const { userInfo } = useSelector((state) => state.userRegisterLogin);
   const itemsCount = useSelector((state) => state.cart.itemsCount);
   const { categories } = useSelector((state) => state.getCategories);
+  const { messageReceived } = useSelector((state) => state.adminChat);
 
   const [searchCategoryToggle, setSearchCategoryToggle] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
   const navigate = useNavigate();
+
 
   useEffect(() => {
     dispatch(getCategories());
@@ -36,6 +40,30 @@ const Header = () => {
          navigate("/product-list");
      }
   }
+
+  useEffect(() => {
+    if (userInfo.isAdmin) {
+      var audio = new Audio("/audio/ping-82822.mp3");
+      const socket = socketIOClient();
+      socket.emit("admin connected", "admin" + Math.floor(Math.random() * 10000000));
+      socket.on("server sends message from client to admin", ({ user, message }) => {
+        dispatch(setSocket(socket));
+        //   let chatRooms = {
+        //     fddf54gfgfSocketID: [{ "client": "dsfdf" }, { "client": "dsfdf" }, { "admin": "dsfdf" }],
+        //   };
+        dispatch(setChatRooms(user, message));
+        dispatch(setMessageReceived(true));
+        audio.play();
+      })
+      socket.on("disconnected", ({reason, socketId}) => {
+        dispatch(removeChatRoom(socketId));
+      })
+      return () => socket.disconnect();
+    }
+  }, [userInfo.isAdmin])
+
+
+
 
   return (
     <Navbar collapseOnSelect expand="lg">
@@ -64,7 +92,7 @@ const Header = () => {
               <LinkContainer to="/admin/orders">
                 <Nav.Link>
                   Admin
-                  <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+                  {messageReceived && <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>}
                 </Nav.Link>
               </LinkContainer>
             ) : userInfo.name && !userInfo.isAdmin ? (
