@@ -84,6 +84,7 @@ const apiRoutes = require('./routes/apiRoutes')
 // app.get('/', async (req, res, next) => {
 //   res.json({ message: "API is working" })
 // })
+app.use('/api', apiRoutes)
 
 const path = require('path');
 if (process.env.NODE_ENV === 'production') {
@@ -100,7 +101,7 @@ if (process.env.NODE_ENV === 'production') {
 const connectDB = require('./config/db')
 connectDB();
 
-app.use('/api', apiRoutes)
+
 
 app.use((error, req, res, next) => {
   if (process.env.NODE_ENV === "development") {
