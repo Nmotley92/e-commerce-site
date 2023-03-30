@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 const AdminLinksComponent = () => {
     const dispatch = useDispatch()
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar bg="dark" variant="light">
       <Nav className="flex-column">
         <LinkContainer to="/admin/orders">
           <Nav.Link>Orders</Nav.Link>
