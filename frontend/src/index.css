@@ -50,6 +50,8 @@ footer {
 .admin-product-page td,
 .admin-user-page thead,
 .admin-analytics-page .form-label,
+.login-page,
+.register-page,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -91,7 +93,16 @@ footer {
 
 .card-img {
   border-radius: 10%;
+}
 
+.cart {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  margin: 100px;
+}
+
+.alert {
+  width: 40%;
 }
 
  .custom-rating .fas {
