@@ -1,4 +1,4 @@
-/* html {
+ html {
   position: relative;
   min-height: 100%;
 }
@@ -41,6 +41,10 @@ footer {
 }
 
 .category-container,
+.carousel-caption,
+.intro-container p,
+.admin-order-page thead,
+.admin-order-page td,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -58,14 +62,20 @@ footer {
   font-weight: 600;
 }
 
-.intro-container p {
+/* .intro-container p {
   color: white;
   font-family: 'Montserrat', sans-serif;
+} */
+
+.admin-order-page h1 {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 
 #dropdown-basic-button,
 .search-btn,
-.card-container {
+.card {
   background-color: black;
   border-color: transparent;
   color: white;
@@ -73,12 +83,14 @@ footer {
 
 .card-img {
   border-radius: 10%;
+
 }
 
-.carousel-caption {
+ .carousel-caption {
   font-family: 'Libre Caslon Text', sans-serif;
-}
+} 
 
-.custom-rating .fas {
+ .custom-rating .fas {
   color: #f5c518;
-} */
+} 
+

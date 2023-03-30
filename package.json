@@ -1,0 +1,41 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+      "start": "nodemon server.js",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "seed": "node seeder/seeder.js -i",
+      "server-prod": "node server.js",
+      "server-dev": "npx nodemon server.js",
+      "client": "npm start --prefix ../frontend",
+      "kill": "fuser -k 3000/tcp",
+      "dev": "concurrently --kill-others-on-fail \"npm run server-dev\" \"npm run client\"",
+      "seed:data": "node seeder/seeder",
+      "seed:data-d": "node seeder/seeder -d",
+      "heroku-postbuild": "npm install --prefix frontend && npm run build --prefix frontend"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "bcryptjs": "^2.4.3",
+      "cookie-parser": "^1.4.6",
+      "dotenv": "^16.0.0",
+      "express": "^4.17.2",
+      "express-fileupload": "^1.3.1",
+      "helmet": "^5.0.2",
+      "jsonwebtoken": "^8.5.1",
+      "mongoose": "^6.2.8",
+      "socket.io": "^4.5.1",
+      "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+      "concurrently": "^7.1.0",
+      "nodemon": "^2.0.15"
+    },
+    "engines": {
+      "node": "19.x"
+    }
+  }
+  

@@ -24,15 +24,28 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
   useEffect(() => {
     const abctrl = new AbortController();
     fetchUsers(abctrl)
-      .then((res) => setUsers(res))
-      .catch((er) =>
-      dispatch(logout())
-        // console.log(
-        //   er.response.data.message ? er.response.data.message : er.response.data
-        // )
-      );
+      .then((res) => {
+        if (res && res.users && Array.isArray(res.users)) {
+          setUsers(res.users);
+        } else {
+          console.log("Invalid response format:", res);
+        }
+      })
+      .catch((er) => {
+        if (er.response) {
+        dispatch(logout());
+          console.log(
+            er.response.data.message ? er.response.data.message : er.response.data
+          );
+        } else {
+          console.log("Error fetching users:", er.message);
+          
+        }
+      });
     return () => abctrl.abort();
   }, [userDeleted]);
+  
+  
 
   return (
     <Row className="m-5">
@@ -53,6 +66,7 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
             </tr>
           </thead>
           <tbody>
+          {console.log("Users state:", users)}
             {users.map(
               (user, idx) => (
                 <tr key={idx}>
@@ -89,4 +103,3 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
 };
 
 export default UsersPageComponent;
-
