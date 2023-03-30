@@ -1,6 +1,7 @@
  html {
   position: relative;
   min-height: 100%;
+  background-color: black;
 }
 
 body{
@@ -45,6 +46,10 @@ footer {
 .intro-container p,
 .admin-order-page thead,
 .admin-order-page td,
+.admin-product-page thead,
+.admin-product-page td,
+.admin-user-page thead,
+.admin-analytics-page .form-label,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -67,7 +72,10 @@ footer {
   font-family: 'Montserrat', sans-serif;
 } */
 
-.admin-order-page h1 {
+.admin-order-page h1,
+.admin-user-page h1,
+.admin-product-page h1,
+.admin-analytics-page h1 {
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
@@ -85,10 +93,6 @@ footer {
   border-radius: 10%;
 
 }
-
- .carousel-caption {
-  font-family: 'Libre Caslon Text', sans-serif;
-} 
 
  .custom-rating .fas {
   color: #f5c518;
