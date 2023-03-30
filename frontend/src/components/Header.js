@@ -13,6 +13,7 @@ const Header = () => {
   const { userInfo } = useSelector((state) => state.userRegisterLogin);
   const itemsCount = useSelector((state) => state.cart.itemsCount);
   const { categories } = useSelector((state) => state.getCategories);
+  console.log(categories);
   const { messageReceived } = useSelector((state) => state.adminChat);
 
   const [searchCategoryToggle, setSearchCategoryToggle] = useState("All");
@@ -69,7 +70,7 @@ const Header = () => {
     <Navbar collapseOnSelect expand="lg">
       <Container>
         <LinkContainer to="/">
-          <Navbar.Brand href="/">BEST ONLINE SHOP</Navbar.Brand>
+          <Navbar.Brand href="/">BibliophileBazaar</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -77,7 +78,7 @@ const Header = () => {
             <InputGroup>
               <DropdownButton id="dropdown-basic-button" title={searchCategoryToggle}>
                   <Dropdown.Item onClick={() => setSearchCategoryToggle("All")}>All</Dropdown.Item>
-                {categories.map((category, id) => (
+                {categories && categories.map((category, id) => (
                   <Dropdown.Item key={id} onClick={() => setSearchCategoryToggle(category.name)}>{category.name}</Dropdown.Item>
                 ))}
               </DropdownButton>
