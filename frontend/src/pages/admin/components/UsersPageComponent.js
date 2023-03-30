@@ -14,10 +14,10 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
 
   const deleteHandler = async (userId) => {
     if (window.confirm("Are you sure?")) {
-        const data  = await deleteUser(userId);
-        if(data === 'user removed') {
-            setUserDeleted(!userDeleted)
-        }
+      const data = await deleteUser(userId);
+      if (data === 'user removed') {
+        setUserDeleted(!userDeleted)
+      }
     }
   };
 
@@ -33,72 +33,74 @@ const UsersPageComponent = ({ fetchUsers, deleteUser }) => {
       })
       .catch((er) => {
         if (er.response) {
-        dispatch(logout());
+          dispatch(logout());
           console.log(
             er.response.data.message ? er.response.data.message : er.response.data
           );
         } else {
           console.log("Error fetching users:", er.message);
-          
+
         }
       });
     return () => abctrl.abort();
   }, [userDeleted]);
-  
-  
+
+
 
   return (
-    <Row className="m-5">
-      <Col md={2}>
-        <AdminLinksComponent />
-      </Col>
-      <Col md={10}>
-        <h1>User List</h1>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Is Admin</th>
-              <th>Edit/Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-          {console.log("Users state:", users)}
-            {users.map(
-              (user, idx) => (
-                <tr key={idx}>
-                  <td>{idx + 1}</td>
-                  <td>{user.name}</td>
-                  <td>{user.lastName}</td>
-                  <td>{user.email}</td>
-                  <td>
-                    {user.isAdmin ? <i className="bi bi-check-lg text-success"></i> : <i className="bi bi-x-lg text-danger"></i>}
-                  </td>
-                  <td>
-                    <LinkContainer to={`/admin/edit-user/${user._id}`}>
-                      <Button className="btn-sm">
-                        <i className="bi bi-pencil-square"></i>
+    <div className="admin-user-page">
+      <Row className="m-5">
+        <Col md={2}>
+          <AdminLinksComponent />
+        </Col>
+        <Col md={10}>
+          <h1>User List</h1>
+          <Table bordered responsive>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Is Admin</th>
+                <th>Edit/Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {console.log("Users state:", users)}
+              {users.map(
+                (user, idx) => (
+                  <tr key={idx}>
+                    <td>{idx + 1}</td>
+                    <td>{user.name}</td>
+                    <td>{user.lastName}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      {user.isAdmin ? <i className="bi bi-check-lg text-success"></i> : <i className="bi bi-x-lg text-danger"></i>}
+                    </td>
+                    <td>
+                      <LinkContainer to={`/admin/edit-user/${user._id}`}>
+                        <Button className="btn-sm">
+                          <i className="bi bi-pencil-square"></i>
+                        </Button>
+                      </LinkContainer>
+                      {" / "}
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(user._id)}
+                      >
+                        <i className="bi bi-x-circle"></i>
                       </Button>
-                    </LinkContainer>
-                    {" / "}
-                    <Button
-                      variant="danger"
-                      className="btn-sm"
-                      onClick={() => deleteHandler(user._id)}
-                    >
-                      <i className="bi bi-x-circle"></i>
-                    </Button>
-                  </td>
-                </tr>
-              )
-            )}
-          </tbody>
-        </Table>
-      </Col>
-    </Row>
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

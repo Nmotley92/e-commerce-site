@@ -37,6 +37,7 @@ const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
   }, [productDeleted]);
 
   return (
+    <div className="admin-product-page">
     <Row className="m-5">
       <Col md={2}>
         <AdminLinksComponent />
@@ -50,7 +51,7 @@ const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
             </Button>
           </LinkContainer>
         </h1>
-        <Table striped bordered hover responsive>
+        <Table bordered responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -88,6 +89,7 @@ const ProductsPageComponent = ({ fetchProducts, deleteProduct }) => {
         </Table>
       </Col>
     </Row>
+    </div>
   );
 };
 
