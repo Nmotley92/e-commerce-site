@@ -124,3 +124,8 @@ footer {
   color: #f5c518;
 } 
 
+.white-close-button {
+  background-color: white;
+  color: black;
+  border: none;
+}

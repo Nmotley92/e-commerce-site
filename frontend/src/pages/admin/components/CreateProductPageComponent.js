@@ -197,7 +197,8 @@ const CreateProductPageComponent = ({
               <Form.Group className="mb-3" controlId="formBasicCategory">
                 <Form.Label>
                   Category
-                  <CloseButton onClick={deleteCategoryHandler} />(
+                  <span> </span>
+                  <CloseButton className='white-close-button' onClick={deleteCategoryHandler} />(
                   <small>remove selected</small>)
                 </Form.Label>
                 <Form.Select
