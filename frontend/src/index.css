@@ -31,6 +31,7 @@ footer {
 .nav-link,
 .navbar-brand:hover,
 .navbar-brand.active,
+#collasible-nav-dropdown.dropdown-toggle.nav-link,
 .navbar-light .navbar-nav .nav-link.active {
   color: white;
 }
@@ -51,8 +52,13 @@ footer {
 .admin-analytics-page .form-label,
 .admin-create-page,
 .admin-create-page .form-label,
+.user-order-page thead,
+.user-order-page td,
+.review-body .form-label,
 .login-page,
 .register-page,
+.user-profile-page,
+.card-body,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -60,6 +66,12 @@ footer {
 
 .sidebar {
   background-color: #212529;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.list-group-item {
+  background-color: black;
   color: white;
   font-family: 'Montserrat', sans-serif;
 }
@@ -76,10 +88,12 @@ footer {
   font-weight: 600;
 }
 
+.review-body h5,
 .admin-order-page h1,
 .admin-user-page h1,
 .admin-product-page h1,
 .admin-analytics-page h1,
+.user-order-page h1,
 .admin-create-page h1 {
   color: white;
   font-family: 'Montserrat', sans-serif;

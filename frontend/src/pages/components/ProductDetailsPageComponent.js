@@ -128,7 +128,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                             <Col md={8}>
                                 <Row>
                                     <Col md={8}>
-                                        <ListGroup variant="flush">
+                                        <ListGroup>
                                             <ListGroup.Item>
                                                 <h1>{product.name}</h1>
                                             </ListGroup.Item>
@@ -178,7 +178,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col className="mt-5">
+                                    <Col className="mt-5 review-body">
                                         <h5>REVIEWS</h5>
                                         <ListGroup variant="flush">
                                             {product.reviews &&
@@ -204,7 +204,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                                 </Row>
                                 <hr />
                                 {!userInfo.name && <Alert variant="danger">Login first to write a review</Alert>}
-                                <Form onSubmit={sendReviewHandler}>
+                                <Form className="review-body" onSubmit={sendReviewHandler}>
                                     <Form.Group
                                         className="mb-3"
                                         controlId="exampleForm.ControlInput1"
