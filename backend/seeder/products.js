@@ -17,10 +17,10 @@ const products = [
   {
     name: "Mr. Penumbra's 24-Hour Bookstore",
     description:
-      "",
+      "The Great Recession has shuffled Clay Jannon out of his life as a San Francisco Web-design drone - and serendipity, sheer curiosity, and the ability to climb a ladder like a monkey has landed him a new gig working the night shift at Mr. Penumbra’s 24-Hour Bookstore. But after just a few days on the job, Clay begins to realize that this store is even more curious than the name suggests. There are only a few customers, but they come in repeatedly and never seem to actually buy anything, instead “checking out” impossibly obscure volumes from strange corners of the store, all according to some elaborate, long-standing arrangement with the gnomic Mr. Penumbra. The store must be a front for something larger, Clay concludes, and soon he’s embarked on a complex analysis of the customers’ behavior and roped his friends into helping to figure out just what’s going on. But once they bring their findings to Mr. Penumbra, it turns out the secrets extend far outside the walls of the bookstore. With irresistible brio and dazzling intelligence, Robin Sloan has crafted a literary adventure story for the 21st century, evoking both the fairy-tale charm of Haruki Murakami and the enthusiastic novel-of-ideas wizardry of Neal Stephenson or a young Umberto Eco, but with a unique and feisty sensibility that’s rare to the world of literary fiction. Mr. Penumbra’s 24-Hour Bookstore is exactly what it sounds like: an establishment you have to enter and will never want to leave, a modern-day cabinet of wonders ready to give a jolt of energy to every curious listener, no matter the time of day. ",
     count: 5,
     price: 25,
-    category: "Computers/Laptops/Lenovo",
+    category: "Thriller/Horror/Mystery/Techno-Thriller",
     images: [{ path: "/images/mr-penumbra.jpg" },],
     rating: 5,
     reviewsNumber: 5,
@@ -36,18 +36,6 @@ const products = [
     images: [{ path: "/images/wild.jpg" }],
     rating: 4.5,
     reviewsNumber: 6,
-    reviews: [],
-    attrs: [{ key: "Binding", value: "soft" }]
-  },
-  {
-    name: "The Call of the Wild",
-    description: "This classic adventure novel follows the story of Buck, a domesticated dog who is sold to be a sled dog in the Alaskan wilderness. The novel explores themes of survival and the primal instincts that drive us.",
-    count: 5,
-    price: 16,
-    category: "Fiction/Adventure",
-    images: [{ path: "/images/the-call-of-the-wild.jpg" }],
-    rating: 4.3,
-    reviewsNumber: 4,
     reviews: [],
     attrs: [{ key: "Binding", value: "soft" }]
   },
@@ -124,18 +112,6 @@ const products = [
     Attrs: [{ key: "Binding", value: "hardcover" }]
   },
   {
-    Name: "Wild",
-    Description: "This memoir chronicles the author's solo hike along the Pacific Crest Trail. The book explores themes of nature, spirituality, and the human desire for adventure and transcendence.",
-    Count: 7,
-    Price: 14,
-    Category: "Non-fiction/Memoir",
-    Images: [{ path: "/images/wild.jpg" }],
-    Rating: 4.4,
-    ReviewsNumber: 8,
-    Reviews: [],
-    Attrs: [{ key: "Binding", value: "paperback" }]
-  },
-  {
     Name: "Into Thin Air",
     Description: "This non-fiction book recounts the author's experience climbing Mount Everest. The book explores themes of nature, spirituality, and the human desire for adventure and transcendence.",
     Count: 3,
@@ -152,7 +128,7 @@ const products = [
     Description: "This classic adventure novel follows Buck, a dog who is stolen from his comfortable life in California and sold into service as a sled dog in the Yukon. The book explores themes of nature, spirituality, and the human desire for adventure and transcendence.",
     Count: 3,
     Price: 15,
-    Category: "Fiction/Adventure",
+    Category: "Fiction/Adventure/Classic",
     Images: [{ path: "/images/the-call-of-the-wild.jpg" }],
     Rating: 4.7,
     ReviewsNumber: 10,
@@ -164,7 +140,7 @@ const products = [
     Description: "This classic children's book follows a young prince who leaves his home planet to travel the universe. The book explores themes of nature, spirituality, and the human desire for adventure and transcendence.",
     Count: 3,
     Price: 15,
-    Category: "Fiction/Adventure",
+    Category: "Fiction/Adventure/Classic/Children",
     Images: [{ path: "/images/the-little-prince.jpg" }],
     Rating: 4.7,
     ReviewsNumber: 10,
