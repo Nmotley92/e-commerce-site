@@ -12,7 +12,7 @@ const UserOrdersPageComponent = ({getOrders}) => {
     }, [])
 
   return (
-    <Row className="m-5">
+    <Row className="m-5 user-order-page">
       <Col md={12}>
         <h1>My Orders</h1>
         <Table striped bordered hover>
