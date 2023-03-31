@@ -72,7 +72,7 @@ const Header = () => {
         <LinkContainer to="/">
           <Navbar.Brand href="/">BibliophileBazaar</Navbar.Brand>
         </LinkContainer>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar navbar-dark bg-dark" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <InputGroup>

@@ -115,37 +115,43 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     window.location.href = "/product-list";
   };
 
+  // const styles = {
+  //   backgroundColor: '#212529',
+  //   color: 'white',
+  //   fontFamily: 'Montserrat, sans-serif'
+  // }
+
   return (
     <Container fluid>
       <Row>
         <Col md={3}>
           <ListGroup variant="flush">
-            <ListGroup.Item className="mb-3 mt-3">
+            <ListGroup.Item className="mt-3 sidebar">
               <SortOptionsComponent setSortOption={setSortOption} />
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item  className="sidebar">
               FILTER: <br />
               <PriceFilterComponent price={price} setPrice={setPrice} />
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item  className="sidebar">
               <RatingFilterComponent
                 setRatingsFromFilter={setRatingsFromFilter}
               />
             </ListGroup.Item>
             {!location.pathname.match(/\/category/) && (
-              <ListGroup.Item>
+              <ListGroup.Item className="sidebar">
                 <CategoryFilterComponent
                   setCategoriesFromFilter={setCategoriesFromFilter}
                 />
               </ListGroup.Item>
             )}
-            <ListGroup.Item>
+            <ListGroup.Item className="sidebar"> 
               <AttributesFilterComponent
                 attrsFilter={attrsFilter}
                 setAttrsFromFilter={setAttrsFromFilter}
               />
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item className="sidebar">
               <Button variant="primary" onClick={handleFilters}>
                 Filter
               </Button>{" "}
