@@ -23,6 +23,7 @@ footer {
 }
 
 .navbar-brand,
+.review-body h5,
 .card-title {
   color: white;
   font-weight: 600;
@@ -53,6 +54,7 @@ footer {
 .admin-create-page .form-label,
 .login-page,
 .register-page,
+.card-body,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -60,6 +62,12 @@ footer {
 
 .sidebar {
   background-color: #212529;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.list-group-item {
+  background-color: black;
   color: white;
   font-family: 'Montserrat', sans-serif;
 }

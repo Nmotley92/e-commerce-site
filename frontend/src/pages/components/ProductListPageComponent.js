@@ -115,12 +115,6 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
     window.location.href = "/product-list";
   };
 
-  // const styles = {
-  //   backgroundColor: '#212529',
-  //   color: 'white',
-  //   fontFamily: 'Montserrat, sans-serif'
-  // }
-
   return (
     <Container fluid>
       <Row>

@@ -128,7 +128,7 @@ const ProductDetailsPageComponent = ({ addToCartReduxAction, reduxDispatch, getP
                             <Col md={8}>
                                 <Row>
                                     <Col md={8}>
-                                        <ListGroup variant="flush">
+                                        <ListGroup>
                                             <ListGroup.Item>
                                                 <h1>{product.name}</h1>
                                             </ListGroup.Item>
