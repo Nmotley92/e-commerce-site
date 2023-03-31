@@ -31,13 +31,11 @@ footer {
 .nav-link,
 .navbar-brand:hover,
 .navbar-brand.active,
-.navbar-light .navbar-nav .nav-link.active,
-#collasible-nav-dropdown.dropdown-toggle.nav-link {
+.navbar-light .navbar-nav .nav-link.active {
   color: white;
 }
 
-.nav-link:hover,
-#collasible-nav-dropdown.dropdown-toggle.nav-link:hover {
+.nav-link:hover {
   color: gray;
 }
 
@@ -49,12 +47,21 @@ footer {
 .admin-product-page thead,
 .admin-product-page td,
 .admin-user-page thead,
+.admin-user-page td,
 .admin-analytics-page .form-label,
+.admin-create-page,
+.admin-create-page .form-label,
 .login-page,
 .register-page,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
+}
+
+.sidebar {
+  background-color: #212529;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .intro-container {
@@ -69,15 +76,11 @@ footer {
   font-weight: 600;
 }
 
-/* .intro-container p {
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-} */
-
 .admin-order-page h1,
 .admin-user-page h1,
 .admin-product-page h1,
-.admin-analytics-page h1 {
+.admin-analytics-page h1,
+.admin-create-page h1 {
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
@@ -89,6 +92,10 @@ footer {
   background-color: black;
   border-color: transparent;
   color: white;
+}
+
+.navbar-toggler.show {
+  border-color: red;
 }
 
 .card-img {
