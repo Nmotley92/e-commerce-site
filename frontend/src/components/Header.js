@@ -43,7 +43,7 @@ const Header = () => {
   }
 
   useEffect(() => {
-    if (userInfo.isAdmin) {
+    if (userInfo?.isAdmin) {
       var audio = new Audio("/audio/ping-82822.mp3");
       const socket = socketIOClient();
       socket.emit("admin connected", "admin" + Math.floor(Math.random() * 10000000));
@@ -61,7 +61,7 @@ const Header = () => {
       })
       return () => socket.disconnect();
     }
-  }, [userInfo.isAdmin])
+  }, [userInfo?.isAdmin])
 
 
 
@@ -89,14 +89,14 @@ const Header = () => {
             </InputGroup>
           </Nav>
           <Nav>
-            {userInfo.isAdmin ? (
+            {userInfo?.isAdmin ? (
               <LinkContainer to="/admin/orders">
                 <Nav.Link>
                   Admin
                   {messageReceived && <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>}
                 </Nav.Link>
               </LinkContainer>
-            ) : userInfo.name && !userInfo.isAdmin ? (
+            ) : userInfo?.name && !userInfo?.isAdmin ? (
               <NavDropdown
                 title={`${userInfo.name} ${userInfo.lastName}`}
                 id="collasible-nav-dropdown"

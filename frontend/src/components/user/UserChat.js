@@ -18,7 +18,7 @@ const UserChat = () => {
   const userInfo = useSelector((state) => state.userRegisterLogin.userInfo);
 
   useEffect(() => {
-    if (!userInfo.isAdmin) {
+    if ( userInfo?.isAdmin) {
         setReconnect(false);
          var audio = new Audio("/audio/ping-82822.mp3");
       const socket = socketIOClient();
@@ -44,7 +44,7 @@ const UserChat = () => {
       })
       return () => socket.disconnect();
     }
-  }, [userInfo.isAdmin, reconnect]);
+  }, [userInfo?.isAdmin, reconnect]);
 
   const clientSubmitChatMsg = (e) => {
     if (e.keyCode && e.keyCode !== 13) {
