@@ -81,6 +81,11 @@ footer {
   margin: 100px;
 }
 
+.chat-wrapper {
+  font-family: 'Montserrat', sans-serif;
+  z-index: -1;
+}
+
 .intro-container h1 {
   color: white;
   font-family: 'Montserrat', sans-serif;
@@ -130,3 +135,25 @@ footer {
   color: #f5c518;
 } 
 
+/* MEDIA QUERIES */
+
+@media (max-width: 1024px) {
+  .intro-container {
+    margin: 100px;
+    margin-bottom: 0px;
+  }
+
+  .intro-container img {
+    display: none;
+  }
+}
+
+@media (max-width: 667px) {
+  .intro-container {
+    margin: 60px;
+  }
+
+  .intro-container h1 {
+    font-size: 40px;
+  }
+}
