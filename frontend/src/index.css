@@ -83,7 +83,6 @@ footer {
 
 .chat-wrapper {
   font-family: 'Montserrat', sans-serif;
-  z-index: -1;
 }
 
 .intro-container h1 {
@@ -137,7 +136,7 @@ footer {
 
 /* MEDIA QUERIES */
 
-@media (max-width: 1024px) {
+@media (max-width: 1155px) {
   .intro-container {
     margin: 100px;
     margin-bottom: 0px;
