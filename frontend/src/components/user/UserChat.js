@@ -90,12 +90,12 @@ const UserChat = () => {
               <div key={id}>
                 {item.client && (
                   <p>
-                    <b>You wrote:</b> {item.client}
+                    <b>You:</b> {item.client}
                   </p>
                   )}
                   {item.admin && (
                   <p className="bg-primary p-3 ms-4 text-light rounded-pill">
-                    <b>Support wrote:</b> {item.admin}
+                    <b>Support:</b> {item.admin}
                   </p>
                   )}
                 </div>
