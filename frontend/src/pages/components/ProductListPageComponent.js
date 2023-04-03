@@ -19,7 +19,7 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
   const [showResetFiltersButton, setShowResetFiltersButton] = useState(false);
 
   const [filters, setFilters] = useState({}); // collect all filters
-  const [price, setPrice] = useState(500);
+  const [price, setPrice] = useState(60);
   const [ratingsFromFilter, setRatingsFromFilter] = useState({});
   const [categoriesFromFilter, setCategoriesFromFilter] = useState({});
   const [sortOption, setSortOption] = useState("");
@@ -120,32 +120,32 @@ const ProductListPageComponent = ({ getProducts, categories }) => {
       <Row>
         <Col md={3}>
           <ListGroup variant="flush">
-            <ListGroup.Item className="mb-3 mt-3">
+            <ListGroup.Item className="mt-3 sidebar">
               <SortOptionsComponent setSortOption={setSortOption} />
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item  className="sidebar">
               FILTER: <br />
               <PriceFilterComponent price={price} setPrice={setPrice} />
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item  className="sidebar">
               <RatingFilterComponent
                 setRatingsFromFilter={setRatingsFromFilter}
               />
             </ListGroup.Item>
             {!location.pathname.match(/\/category/) && (
-              <ListGroup.Item>
+              <ListGroup.Item className="sidebar">
                 <CategoryFilterComponent
                   setCategoriesFromFilter={setCategoriesFromFilter}
                 />
               </ListGroup.Item>
             )}
-            <ListGroup.Item>
+            <ListGroup.Item className="sidebar"> 
               <AttributesFilterComponent
                 attrsFilter={attrsFilter}
                 setAttrsFromFilter={setAttrsFromFilter}
               />
             </ListGroup.Item>
-            <ListGroup.Item>
+            <ListGroup.Item className="sidebar">
               <Button variant="primary" onClick={handleFilters}>
                 Filter
               </Button>{" "}

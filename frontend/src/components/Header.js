@@ -13,6 +13,7 @@ const Header = () => {
   const { userInfo } = useSelector((state) => state.userRegisterLogin);
   const itemsCount = useSelector((state) => state.cart.itemsCount);
   const { categories } = useSelector((state) => state.getCategories);
+  console.log(categories);
   const { messageReceived } = useSelector((state) => state.adminChat);
 
   const [searchCategoryToggle, setSearchCategoryToggle] = useState("All");
@@ -42,7 +43,7 @@ const Header = () => {
   }
 
   useEffect(() => {
-    if (userInfo.isAdmin) {
+    if (userInfo?.isAdmin) {
       var audio = new Audio("/audio/ping-82822.mp3");
       const socket = socketIOClient();
       socket.emit("admin connected", "admin" + Math.floor(Math.random() * 10000000));
@@ -60,7 +61,7 @@ const Header = () => {
       })
       return () => socket.disconnect();
     }
-  }, [userInfo.isAdmin])
+  }, [userInfo?.isAdmin])
 
 
 
@@ -69,15 +70,15 @@ const Header = () => {
     <Navbar collapseOnSelect expand="lg">
       <Container>
         <LinkContainer to="/">
-          <Navbar.Brand href="/">BEST ONLINE SHOP</Navbar.Brand>
+          <Navbar.Brand href="/">Book Haven</Navbar.Brand>
         </LinkContainer>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar navbar-dark bg-dark" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <InputGroup>
               <DropdownButton id="dropdown-basic-button" title={searchCategoryToggle}>
                   <Dropdown.Item onClick={() => setSearchCategoryToggle("All")}>All</Dropdown.Item>
-                {categories.map((category, id) => (
+                {categories && categories.map((category, id) => (
                   <Dropdown.Item key={id} onClick={() => setSearchCategoryToggle(category.name)}>{category.name}</Dropdown.Item>
                 ))}
               </DropdownButton>
@@ -88,14 +89,14 @@ const Header = () => {
             </InputGroup>
           </Nav>
           <Nav>
-            {userInfo.isAdmin ? (
+            {userInfo?.isAdmin ? (
               <LinkContainer to="/admin/orders">
                 <Nav.Link>
                   Admin
                   {messageReceived && <span className="position-absolute top-1 start-10 translate-middle p-2 bg-danger border border-light rounded-circle"></span>}
                 </Nav.Link>
               </LinkContainer>
-            ) : userInfo.name && !userInfo.isAdmin ? (
+            ) : userInfo?.name && !userInfo?.isAdmin ? (
               <NavDropdown
                 title={`${userInfo.name} ${userInfo.lastName}`}
                 id="collasible-nav-dropdown"

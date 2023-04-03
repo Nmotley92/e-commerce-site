@@ -1,6 +1,7 @@
  html {
   position: relative;
   min-height: 100%;
+  background-color: black;
 }
 
 body{
@@ -30,13 +31,12 @@ footer {
 .nav-link,
 .navbar-brand:hover,
 .navbar-brand.active,
-.navbar-light .navbar-nav .nav-link.active,
-#collasible-nav-dropdown.dropdown-toggle.nav-link {
+#collasible-nav-dropdown.dropdown-toggle.nav-link,
+.navbar-light .navbar-nav .nav-link.active {
   color: white;
 }
 
-.nav-link:hover,
-#collasible-nav-dropdown.dropdown-toggle.nav-link:hover {
+.nav-link:hover {
   color: gray;
 }
 
@@ -45,14 +45,44 @@ footer {
 .intro-container p,
 .admin-order-page thead,
 .admin-order-page td,
+.admin-product-page thead,
+.admin-product-page td,
+.admin-user-page thead,
+.admin-user-page td,
+.admin-analytics-page .form-label,
+.admin-create-page,
+.admin-create-page .form-label,
+.user-order-page thead,
+.user-order-page td,
+.review-body .form-label,
+.login-page,
+.register-page,
+.user-profile-page,
+.card-body,
 .navbar {
   font-family: 'Montserrat', sans-serif;
   color: white;
 }
 
+.sidebar {
+  background-color: #212529;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.list-group-item {
+  background-color: black;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .intro-container {
   height: 600px;
   margin: 100px;
+}
+
+.chat-wrapper {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .intro-container h1 {
@@ -62,12 +92,13 @@ footer {
   font-weight: 600;
 }
 
-/* .intro-container p {
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-} */
-
-.admin-order-page h1 {
+.review-body h5,
+.admin-order-page h1,
+.admin-user-page h1,
+.admin-product-page h1,
+.admin-analytics-page h1,
+.user-order-page h1,
+.admin-create-page h1 {
   color: white;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
@@ -81,16 +112,51 @@ footer {
   color: white;
 }
 
-.card-img {
-  border-radius: 10%;
-
+.navbar-toggler.show {
+  border-color: red;
 }
 
- .carousel-caption {
-  font-family: 'Libre Caslon Text', sans-serif;
-} 
+.card-img {
+  border-radius: 10%;
+}
+
+.cart {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  margin: 100px;
+}
+
+.alert {
+  width: 40%;
+}
 
  .custom-rating .fas {
   color: #f5c518;
 } 
 
+.white-close-button {
+  background-color: white;
+  color: black;
+  border: none;
+}/* MEDIA QUERIES */
+
+@media (max-width: 1155px) {
+  .intro-container {
+    margin: 100px;
+    margin-bottom: 0px;
+  }
+
+  .intro-container img {
+    display: none;
+  }
+}
+
+@media (max-width: 667px) {
+  .intro-container {
+    margin: 60px;
+  }
+
+  .intro-container h1 {
+    font-size: 40px;
+  }
+}
