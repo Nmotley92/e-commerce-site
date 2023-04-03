@@ -70,7 +70,7 @@ const Header = () => {
     <Navbar collapseOnSelect expand="lg">
       <Container>
         <LinkContainer to="/">
-          <Navbar.Brand href="/">BibliophileBazaar</Navbar.Brand>
+          <Navbar.Brand href="/">Book Haven</Navbar.Brand>
         </LinkContainer>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar navbar-dark bg-dark" />
         <Navbar.Collapse id="responsive-navbar-nav">
