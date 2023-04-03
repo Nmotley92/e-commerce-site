@@ -134,7 +134,11 @@ footer {
   color: #f5c518;
 } 
 
-/* MEDIA QUERIES */
+.white-close-button {
+  background-color: white;
+  color: black;
+  border: none;
+}/* MEDIA QUERIES */
 
 @media (max-width: 1155px) {
   .intro-container {
