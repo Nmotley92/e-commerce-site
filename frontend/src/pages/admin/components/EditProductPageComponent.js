@@ -162,10 +162,10 @@ const EditProductPageComponent = ({
   }
 
   return (
-    <Container>
+    <Container className="admin-edit-product">
       <Row className="justify-content-md-center mt-5">
         <Col md={1}>
-          <Link to="/admin/products" className="btn btn-info my-3">
+          <Link to="/admin/products" className="btn btn-primary my-3">
             Go Back
           </Link>
         </Col>
@@ -345,7 +345,7 @@ const EditProductPageComponent = ({
               <Row>
                 {product.images &&
                   product.images.map((image, idx) => (
-                    <Col key={idx} style={{ position: "relative" }} xs={3}>
+                    <Col key={idx} style={{ position: "relative", margin: "10px 0px" }} xs={3}>
                       <Image
                         crossOrigin="anonymous"
                         src={image.path ?? null}
