@@ -10,6 +10,7 @@ const AddedToCartMessageComponent = ({ showCartMessage, setShowCartMessage }) =>
 
   return (
     <Alert
+      className="cart-message"
       show={showCartMessage}
       variant="success"
       onClose={() => setShowCartMessage(false)}
