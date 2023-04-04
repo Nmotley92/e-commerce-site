@@ -4,7 +4,7 @@ const urlsToCache = ['index.html', 'offline.html'];
 const self = this;
 
 //Install SW
-self.addEventListener('install', (event) => {
+self.addEventListener('buttonInstall', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then((cache) => {
