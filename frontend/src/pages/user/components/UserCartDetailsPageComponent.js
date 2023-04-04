@@ -80,7 +80,7 @@ const UserCartDetailsPageComponent = ({cartItems, itemsCount, cartSubtotal, user
 
   return (
     <Container fluid>
-      <Row className="mt-4">
+      <Row className="mt-4 user-cart-details">
         <h1>Cart Details</h1>
         <Col md={8}>
           <br />
