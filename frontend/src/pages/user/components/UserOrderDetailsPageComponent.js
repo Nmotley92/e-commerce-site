@@ -111,7 +111,7 @@ const UserOrderDetailsPageComponent = ({
               <Form.Select value={paymentMethod} disabled={true}>
                 <option value="pp">PayPal</option>
                 <option value="cod">
-                  Cash On Delivery (delivery may be delayed)
+                  Cash On Delivery (Delivery may be delayed)
                 </option>
               </Form.Select>
             </Col>

@@ -37,7 +37,7 @@ const UserCartDetailsPageComponent = ({cartItems, itemsCount, cartSubtotal, user
         .then((data) => {
             if (!data.address || !data.city || !data.country || !data.zipCode || !data.state || !data.phoneNumber) {
                 setButtonDisabled(true);
-                setMissingAddress(" .In order to make order, fill out your profile with correct address, city etc.");
+                setMissingAddress(" You must add your address to your profile before your order can be delivered.");
             } else {
                 setUserAddress({address: data.address, city: data.city, country: data.country, zipCode: data.zipCode, state: data.state, phoneNumber: data.phoneNumber})
                 setMissingAddress(false);
