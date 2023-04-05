@@ -33,10 +33,14 @@ to communicate. Used for chat feature.
 ## Contributing
 If you would like to contribute to the project, please follow these steps:
 
-Fork the repository
-Create a new branch for your feature: git checkout -b my-new-feature
-Make changes to the code and commit them: git commit -am 'Features added'
-Push the changes to your branch: git push origin my-new-feature
+Fork the repository. 
+
+Create a new branch for your feature: git checkout -b my-new-feature. 
+
+Make changes to the code and commit them: git commit -am 'Features added'. 
+
+Push the changes to your branch: git push origin my-new-feature. 
+
 Create a new pull request in GitHub
 
 ## Preview
