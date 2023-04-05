@@ -1,7 +1,7 @@
 # MERN Stack Project e-commerce-site
 Welcome to our online bookstore! We are the premier destination for book lovers everywhere, offering an extensive selection of books in every genre imaginable. From bestsellers to hidden gems, we have something for everyone.
 
-Our user-friendly website makes it easy to search for and find the books you're looking for, with detailed descriptions, customer reviews, and recommendations to help guide your choices. Plus, we offer competitive pricing and fast, reliable shipping to make your shopping experience convenient and stress-free.
+Our user-friendly website makes it easy to search for and find the books you're looking for, with detailed descriptions, customer reviews, and recommendations to help guide your choices. Plus, we have fast, reliable shipping to make your shopping experience convenient and stress-free.
 
 Whether you're a casual reader or a bookworm, we have the books you need to satisfy your literary cravings. So come browse our virtual shelves and discover your next favorite read today!
 
