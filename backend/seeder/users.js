@@ -22,7 +22,13 @@ const users = [
     email: "dalton@admin.com",
     password: bcrypt.hashSync("Dadmin", 10),
     isAdmin: true
-  }
+  },
+  {
+    name: "user",
+    lastName: "user",
+    email: "user@user.com",
+    password: bcrypt.hashSync("user@user.com", 10),
+  },
 ]
 
 module.exports = users

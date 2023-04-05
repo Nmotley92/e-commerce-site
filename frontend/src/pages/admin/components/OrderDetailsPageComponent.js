@@ -54,7 +54,7 @@ const OrderDetailsPageComponent = ({ getOrder, markAsDelivered }) => {
   }, [isDelivered, id]);
   return (
     <Container fluid>
-      <Row className="mt-4">
+      <Row className="mt-4 admin-order-details">
         <h1>Order Details</h1>
         <Col md={8}>
           <br />

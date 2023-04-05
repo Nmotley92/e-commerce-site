@@ -37,7 +37,7 @@ const UserCartDetailsPageComponent = ({cartItems, itemsCount, cartSubtotal, user
         .then((data) => {
             if (!data.address || !data.city || !data.country || !data.zipCode || !data.state || !data.phoneNumber) {
                 setButtonDisabled(true);
-                setMissingAddress(" .In order to make order, fill out your profile with correct address, city etc.");
+                setMissingAddress(" You must add your address to your profile before your order can be delivered.");
             } else {
                 setUserAddress({address: data.address, city: data.city, country: data.country, zipCode: data.zipCode, state: data.state, phoneNumber: data.phoneNumber})
                 setMissingAddress(false);
@@ -80,7 +80,7 @@ const UserCartDetailsPageComponent = ({cartItems, itemsCount, cartSubtotal, user
 
   return (
     <Container fluid>
-      <Row className="mt-4">
+      <Row className="mt-4 user-cart-details">
         <h1>Cart Details</h1>
         <Col md={8}>
           <br />

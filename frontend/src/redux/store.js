@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 
 import { cartReducer } from "./reducers/cartReducers";
 import { userRegisterLoginReducer } from './reducers/userReducers';
+import { adminChatReducer } from "./reducers/adminChatReducers";
 import { getCategoriesReducer } from "./reducers/categoryReducers";
 
 const reducer = combineReducers({
     cart: cartReducer,
     userRegisterLogin: userRegisterLoginReducer,
+    adminChat: adminChatReducer,
     getCategories: getCategoriesReducer, 
 })
 

@@ -22,13 +22,14 @@ const OrdersPageComponent = ({ getOrders }) => {
   }, []);
   
   return (
+    <div className="admin-order-page">
     <Row className="m-5">
       <Col md={2}>
         <AdminLinksComponent />
       </Col>
       <Col md={10}>
         <h1>Orders</h1>
-        <Table striped bordered hover responsive>
+        <Table bordered responsive>
           <thead>
             <tr>
               <th>#</th>
@@ -63,7 +64,7 @@ const OrdersPageComponent = ({ getOrders }) => {
                 <td>{order.paymentMethod}</td>
                 <td>
                   <Link to={`/admin/order-details/${order._id}`}>
-                    go to order
+                    Go to order
                   </Link>
                 </td>
               </tr>
@@ -72,6 +73,7 @@ const OrdersPageComponent = ({ getOrders }) => {
         </Table>
       </Col>
     </Row>
+    </div>
   );
 };
 
